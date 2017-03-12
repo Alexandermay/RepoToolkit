@@ -44,10 +44,17 @@ Currently set for a very localized MacOS environment.
 9. You should now see a welcome screen with a list of options.
 
 10.   Test the install by typing "2" at the prompt.  This will launch the Springer script.
-* At the next prompt enter the absolute path to the sample_springer_open directory[^1]
-* If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
 
-If 1_ingestThis.xml is produced, and the content is packaged into pdf, xml and zip directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
+        `Launching the Springer processing script.`
+        `What is the directory you are working with?`
+       ` >`
+
++   At this prompt enter the absolute path to the sample_springer_open directory[^1]
++   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
+
+Note:
+
+If **1_ingestThis.xml** is produced, and the content from Springer is packaged into pdf, xml and zip directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
 + The Proquest and Springer processes require zip files in their own directory.
 + The Trove, Faculty and Student processes require .xlsx files and their respective binaries.
 + The inHouse Digitization process needs a MARC xml file and binaries.
