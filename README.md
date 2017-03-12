@@ -76,6 +76,7 @@ If `1_ingestThis.xml` is produced, and the content from Springer is packaged int
 + The Proquest and Springer processes require zip files in their own directory.
 + The Trove, Faculty and Student processes require .xlsx files and their respective binaries.
 + The inHouse Digitization process needs a MARC xml file and binaries.
++ The Cataloger Subject Analysis should be run against Trove, Faculty, or Student processes, simply drag and drop the entire directory to get an updated analysis.
 
 
 ---
