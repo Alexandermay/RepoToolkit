@@ -49,12 +49,15 @@ Currently set for a very localized MacOS environment.
         `What is the directory you are working with?`
         `>`
 
-+   At this prompt enter the absolute path to the sample_springer_open directory[^1]
++   At this prompt enter the absolute path to the `sample_springer_open` directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
++   Hit `return`
++ You should then see that the files are being moved into their respective directories, and Saxon is launched to transform the Springer XML into the XML Tisch needs to despoit items into the repository.
++ When it finishes, you will be given an option to review the xml.  It is best if you have oXygen, otherwise it will open in a generic text editor.
 
-Note:
+**So, did it work?**
 
-If **1_ingestThis.xml** is produced, and the content from Springer is packaged into pdf, xml and zip directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
+If `1_ingestThis.xml` is produced, and the content from Springer is packaged into pdf, xml and zip directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
 + The Proquest and Springer processes require zip files in their own directory.
 + The Trove, Faculty and Student processes require .xlsx files and their respective binaries.
 + The inHouse Digitization process needs a MARC xml file and binaries.
