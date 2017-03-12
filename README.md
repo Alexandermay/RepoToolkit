@@ -43,16 +43,20 @@ Currently set for a very localized MacOS environment.
 
 9. You should now see a welcome screen with a list of options.
 
-       `Welcome to the Repository Toolkit!`
-       `What would you like to process?`
-       `1. Proquest Electronic Disertations and Theses.`
-       `2. Springer Open Access Articles.`
-       `3. Art and Art History (Trove)`
-       `4. Faculty Scholarship. `
-       `5. Student Scholarship.`
-       `6. InHouse Digitization files.`
-       `7. Cataloger Subject Analysis.`
-       `8. Exit.`
+        ```
+        
+          Welcome to the Repository Toolkit!
+          What would you like to process?
+           1. Proquest Electronic Disertations and Theses.
+           2. Springer Open Access Articles.
+           3. Art and Art History (Trove)
+           4. Faculty Scholarship. 
+           5. Student Scholarship.
+           6. InHouse Digitization files.
+           7. Cataloger Subject Analysis.
+           8. Exit.
+            
+        ```        
 
 10.   Test the install by typing "2" at the prompt.  This will launch the Springer script.
 
