@@ -47,7 +47,7 @@ Currently set for a very localized MacOS environment.
 
         `Launching the Springer processing script.`
         `What is the directory you are working with?`
-       ` >`
+        `>`
 
 +   At this prompt enter the absolute path to the sample_springer_open directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
