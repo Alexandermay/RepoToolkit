@@ -13,11 +13,11 @@ Currently set for a very localized MacOS environment.
 
         `$ ruby -v` 
  
-2. If you don’t have Java, install it with Homebrew:
+2. If you don’t have Java, install it with [Homebrew](https://brew.sh/):
 
         `$ brew cask install java`
 
-3. Download [Saxon-HE](http://www.saxonica.com/download/opensource.xml) and put it in your Applications folder. Make sure the jar file we need to run the transforms is in the following path.
+3. Download the latest version of [Saxon-HE](https://sourceforge.net/projects/saxon/files/) from [Saxonica](http://www.saxonica.com/download/opensource.xml) and put it in your Applications folder. Make sure the jar file we need to run the transforms is in the following path.
 
         `//Applications/SaxonHE9-7-0-15J/saxon9he.jar`
 
@@ -58,21 +58,21 @@ Currently set for a very localized MacOS environment.
             
         ```        
 
-10.   Test the install by typing "2" at the prompt.  This will launch the Springer script.
+10.   Test the install by typing "4" at the prompt.  This will launch the Springer script.
 
-        `Launching the Springer processing script.`
+        `Launching the Faculty Scholarship script.`
         `What is the directory you are working with?`
         `>`
 
-+   At the prompt (`>`) enter the absolute path to the `sample_springer_open` directory[^1]
++   At the prompt (`>`) enter the absolute path to the `sample_set` directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
 +   Hit `return`
-+ You should then see that the files are being moved into their respective directories, and Saxon is launched to transform the Springer XML into the XML Tisch needs to despoit items into the repository.
++ You should then see that the files are being moved into their respective directories, and Saxon is launched to transform the .xslx into the XML Tisch needs to despoit items into the repository.
 + When it finishes, you will be given an option to review the xml.  It is best if you have oXygen, otherwise it will open in a generic text editor.
 
 **So, did it work?**
 
-If `1_ingestThis.xml` is produced, and the content from Springer is packaged into pdf, xml and zip directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
+If `ingestThis.xml` is produced, and the content is packaged into excel, pdf and xml directories respectively, then you are set to process content for ingest into MIRA.  Remember the following:
 + The Proquest and Springer processes require zip files in their own directory.
 + The Trove, Faculty and Student processes require .xlsx files and their respective binaries.
 + The inHouse Digitization process needs a MARC xml file and binaries.
@@ -81,10 +81,10 @@ If `1_ingestThis.xml` is produced, and the content from Springer is packaged int
 
 ---
 
-[^1]: The sample content is a zip file of open access articles from Springer, and each article comes with a Creative Commons 4.0 license, so for the purposes of testing the install, we should be ok. That said, the only people installing this should be from Tisch.
+[^1]: The sample content is a pdf and .xlsx that I put together, so for the purposes of testing the install, we should be ok. That said, the only people installing this should be from Tisch.
 
 [^2]: When I enter the absolute path on my Mac it looks like this, with no trailing whitespace: 
-            `>/Users/amay02/Desktop/RepoToolkit/sample_springer_open`
+            `>/Users/amay02/Desktop/RepoToolkit/sample_set`
 
 
         
