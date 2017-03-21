@@ -34,7 +34,7 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
             <!-- IF I NEED TO DO A BATCH XSLT: this uses the collection function which looks for a document called collection.xml, which in turn references all the seperate xml files I want meged and transformed into one large xml file for ingest. Insert the following instead of <xsl:for-each select="root/row"> 
             <xsl:for-each select="collection('collection.xml')/root/row">
             -->
-            <xsl:for-each select="collection('../../../Library/TempRepo/Directory/xml/collection.xml')/root/row">
+            <xsl:for-each select="collection('../../../Library/TempRepo/Directory/collection.xml')/root/row">
                 <digitalObject>
                     <!-- this portion produces a unique filename by calling the template xslt named filename -->
                     <file>

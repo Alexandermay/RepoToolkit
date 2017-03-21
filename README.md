@@ -1,7 +1,7 @@
 # RepoToolkit
 A toolkit for proto-SIP processing at Tisch Library using a Ruby front-end to launch a set of xslts, and repackage the content consistently for ingest into MIRA.
 
-**Dependencies**
+**Requirements**
 * Java
 * Saxon
 * Ruby 2.0.0
@@ -43,22 +43,18 @@ Currently set for a very localized MacOS environment.
 
 9. You should now see a welcome screen with a list of options.
 
-        ```
         
-          Welcome to the Repository Toolkit!
-          What would you like to process?
-           1. Proquest Electronic Disertations and Theses.
-           2. Springer Open Access Articles.
-           3. Art and Art History (Trove)
-           4. Faculty Scholarship. 
-           5. Student Scholarship.
-           6. InHouse Digitization files.
-           7. Cataloger Subject Analysis.
-           8. Exit.
-            
-        ```        
+            1. Faculty Scholarship.
+            2. Student Scholarship.
+            3. Nutrition School.
+            4. Art and Art History (Trove).
+            5. Springer Open Access Articles.
+            6. Proquest Electronic Disertations and Theses
+            7. 
+            8. Exit
+                  
 
-10.   Test the install by typing "4" at the prompt.  This will launch the Springer script.
+10.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
 
         `Launching the Faculty Scholarship script.`
         `What is the directory you are working with?`

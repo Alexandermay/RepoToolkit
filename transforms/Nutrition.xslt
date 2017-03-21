@@ -23,7 +23,7 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
         <xsl:output-character character="&#x2013;" string="-"/>
     </xsl:character-map>
     <!-- this starts the crosswalk-->
-    <xsl:template match="/">
+    <xsl:template match="/">        
         <input xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"
             xmlns:dcatech="http://nils.lib.tufts.edu/dcatech/"
@@ -36,7 +36,6 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
             -->
             <xsl:for-each select="collection('../../../Library/TempRepo/Directory/collection.xml')/root/row">
                 <digitalObject>
-                    <!-- this portion produces a unique filename by calling the template xslt named filename -->
                     <file>
                         <xsl:call-template name="filename">
                             <xsl:with-param name="file"/>
@@ -44,13 +43,13 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     </file>
                     <!-- this portion crosswalks the rel:hasModel depending on the following format -->
                     <xsl:choose>
-                        <xsl:when test="format = 'application/mp3'">
+                        <xsl:when test="format='application/mp3'">
                             <rel:hasModel>info:fedora/cm:Audio</rel:hasModel>
                         </xsl:when>
-                        <xsl:when test="format = 'application/mp4'">
+                        <xsl:when test="format='application/mp4'">
                             <rel:hasModel>info:fedora/afmodel:TuftsVideo</rel:hasModel>
                         </xsl:when>
-                        <xsl:when test="format = 'image/tiff'">
+                        <xsl:when test="format='image/tiff'">
                             <rel:hasModel>info:fedora/cm:Image.4DS</rel:hasModel>
                         </xsl:when>
                         <xsl:otherwise>
@@ -59,16 +58,13 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     </xsl:choose>
                     <!-- this portion crosswalks the Excel element title to the dc:title element -->
                     <dc:title>
-                        <xsl:value-of
-                            select="normalize-space(replace(replace(Title, '\.$', ''), '; ', ';'))"
+                        <xsl:value-of select="normalize-space(replace(replace(Title,'\.$',''),'; ',';'))"
                         />.</dc:title>
-                    <!-- this portion crosswalks the Excel element Alternative_Title to the dcterms:alternative element -->
+                    <!-- this portion crosswalks the Excel element Alternative_Title to the dcterms:alternative element -->   
                     <xsl:call-template name="altTitleSplit">
                         <xsl:with-param name="altTitleText">
                             <dcterms:alternative>
-                                <xsl:value-of
-                                    select="normalize-space(replace(replace(Alternative_Title, '\.$', ''), '; ', ';'))"
-                                />
+                                <xsl:value-of select="normalize-space(replace(replace(Alternative_Title,'\.$',''),'; ',';'))"/>
                             </dcterms:alternative>
                         </xsl:with-param>
                     </xsl:call-template>
@@ -87,19 +83,19 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     <!-- this portion crosswalks the Excel element description to the dc:description element -->
                     <xsl:call-template name="DescriptionSplit">
                         <xsl:with-param name="descriptionText">
-                            <xsl:value-of select="normalize-space(Description)"/>
+                            <xsl:value-of
+                                select="normalize-space(Description)"
+                            />
                         </xsl:with-param>
-                    </xsl:call-template>
-                    <dc:bibliographicCitation>
-                        <xsl:value-of select="normalize-space(bibliographicCitation | Source)"/>
-                    </dc:bibliographicCitation>
-                    <!-- this portion automatically populates isPart of as faculty scholarship -->
-                    <dcterms:isPartOf>Tufts University faculty scholarship.</dcterms:isPartOf>
-                    <!-- this portion will eventually crosswalks the Excel element source to the dc:source element 
-                    <dc:source>
-                        <xsl:value-of select="normalize-space(Source)"/>
-                    </dc:source>
-                    -->
+                    </xsl:call-template>  
+                    <!-- this portion crosswalks the Excel element Accession_Number to the dc:description element -->
+                    <dc:description>Accession Number: <xsl:value-of
+                        select="normalize-space(Accession)"/>
+                    </dc:description>
+                    <!-- this portion crosswalks the Excel element source to the dc:source element -->
+                    <dcterms:bibliographicCitation>
+                        <xsl:value-of select="normalize-space(BibliographicCitation)"/>
+                    </dcterms:bibliographicCitation>
                     <!-- this portion crosswalks the Excel element abstract to the dc:abstract element -->
                     <dcterms:abstract>
                         <xsl:value-of select="normalize-space(abstract)"/>
@@ -108,7 +104,7 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
                     <!-- this portion crosswalks the Excel element datefrom to the dc:date.created element and strips out any non-numeric data -->
                     <dc:date.created>
-                        <xsl:value-of select="replace(Date_Created, '[^.0-9]', '')"/>
+                        <xsl:value-of select="replace(Date_Created,'[^.0-9]','')"/>
                     </dc:date.created>
                     <!-- this portion inserts the dc:type element depending on the following format -->
                     <dc:type>
@@ -118,7 +114,6 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     <dc:format>
                         <xsl:value-of select="normalize-space(lower-case(Format))"/>
                     </dc:format>
-
                     <!-- this portion crosswalks the Excel element subject terms to the dcadesc:subject element -->
                     <xsl:call-template name="SubjectSplit">
                         <xsl:with-param name="subjectText">
@@ -140,7 +135,7 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     <!-- this portion crosswalks the Excel element geographicTerms to the dcadesc:geog element -->
                     <xsl:call-template name="geogNames">
                         <xsl:with-param name="geogText">
-                            <xsl:value-of select="geographicTerms"/>
+                            <xsl:value-of select="normalize-space(geographicTerms)"/>
                         </xsl:with-param>
                     </xsl:call-template>
                     <!-- this portion crosswalks the Excel element genre to the dcadesc:genre element -->
@@ -153,47 +148,34 @@ This stylesheet converts the Art History Department Excel files to qualified Dub
                     <xsl:choose>
                         <xsl:when test="medium/text()">
                             <dcadesc:genre>Medium: <xsl:value-of
-                                    select="normalize-space(replace(medium, '\.$', ''))"
-                                />.</dcadesc:genre>
+                                select="normalize-space(replace(medium,'\.$',''))"
+                            />.</dcadesc:genre>
                         </xsl:when>
                         <xsl:otherwise> </xsl:otherwise>
                     </xsl:choose>
-                    <!-- this portion crosswalks the Excel element temporal -->
+                    <!-- this portion crosswalks the Excel element temporal -->       
                     <xsl:call-template name="TemporalSplit">
                         <xsl:with-param name="temporalText">
-                            <xsl:value-of select="normalize-space(replace(Century, '\..$', ''))"/>
+                            <xsl:value-of select="normalize-space(replace(Century,'\..$',''))"/>
                         </xsl:with-param>
                     </xsl:call-template>
-                    <!-- this portion crosswalks the Excel element spatial -->
+                    <!-- this portion crosswalks the Excel element spatial -->    
                     <xsl:call-template name="SpatialSplit">
                         <xsl:with-param name="SpatialSplitText">
                             <xsl:value-of select="normalize-space(Spatial)"/>
                         </xsl:with-param>
                     </xsl:call-template>
-                    <!-- this portion inserts boilerplate into the dcRights -->
+                    <dcterms:isPartOf>Tufts University faculty scholarship.</dcterms:isPartOf>
+                    <!-- this portion crosswalks the Excel element rights to the dc:rights element -->
                     <dc:rights>http://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
-                    <!-- # This portion inserts Andrea's license terms into the dcterms:license, it is anticipated once we move to Fedora_4 this free_text info
-                         # will map to dc:rights per the Hydra rights working group definition: 
-                         #
-                         # dc:rights: Free text description of rights, such as administrative contact information, a description of the specific license terms, or other rights-related restrictions.
-                         #
-                         # It is also expected that license will be a controlled string a_la Tufts Non-Exclusive Deposit License v1.0-->
-                    <dcterms:license>
-                        <xsl:value-of select="normalize-space(Rights)"/>
-                    </dcterms:license>
                     <!-- this portion inserts the boilerplate steward information -->
                     <admin:steward>tisch</admin:steward>
                     <!-- this portion inserts the boilerplate batch template information -->
                     <ac:name>amay02</ac:name>
-                    <ac:comment>FacultyScholarshipTransform: <xsl:value-of
-                            select="current-dateTime()"/></ac:comment>
+                    <ac:comment>NutritionBatchTransform: <xsl:value-of  select="current-dateTime()"/></ac:comment>
                     <admin:createdby>externalXSLT</admin:createdby>
-                    <!-- this portion inserts the boilerplate batch displays information -->
+                    <!-- this portion inserts the boilerplate batch displays information -->                   
                     <admin:displays>dl</admin:displays>
-                    <!-- this portion inserts embargo information -->
-                    <admin:embargo>
-                        <xsl:value-of select="normalize-space(Embargo)"/>
-                    </admin:embargo>
                 </digitalObject>
             </xsl:for-each>
         </input>
