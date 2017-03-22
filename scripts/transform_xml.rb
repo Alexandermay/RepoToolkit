@@ -37,4 +37,8 @@ module Transforms
     `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:ingestThis.xml -xsl:../../../Desktop/RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
     self
   end
+  def subject_only
+    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:xml/ingestThis.xml -xsl:../../../Desktop/RepoToolkit/transforms/subject.xslt -o:xml/subject_update.txt`
+     self
+  end
 end

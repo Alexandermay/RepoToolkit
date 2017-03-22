@@ -33,6 +33,10 @@ class Zip_Based_Ingest < Tufts_Scholarship
   require './unzip_directories.rb'
   include UnzipIt
 end
+class Subject_Analysis < Tufts_Scholarship
+  require './subject_analysis.rb'
+  include AnalyzeIt  
+end
 
 puts `clear`
 puts"***************************************************"
@@ -46,9 +50,10 @@ puts "2. Student Scholarship."
 puts "3. Nutrition School."
 puts "4. Art and Art History (Trove)."
 puts "5. Springer Open Access Articles."
-puts "6. Proquest Electronic Disertations and Theses"
-puts "7. "
-puts "8. Exit"
+puts "6. Proquest Electronic Disertations and Theses."
+puts "7. In-House (placeholder only)"
+puts "8. Subject Analysis."
+puts "9. Exit"
 puts
 prompt = "> "
 print prompt
@@ -97,7 +102,19 @@ when "6","6.","Proquest"
     a_new_proquest_ingest.proquest_folders.unzip.create_collection.to_proquest.gobble_xml.gobble_subjects.gobble_pdf.gobble_zip.clean_proquest.finish.qa_it
 break
 
-when "8", "8.", "8. Exit", "Exit"
+when "7","7.","inHouse"
+    puts
+    puts "I'm not ready yet."
+break
+
+when "8","8.","Subject"
+    puts
+    puts "Launching the Subject Analysis script"
+    a_new_analysis = Subject_Analysis.new
+    a_new_analysis.subject_only.finish.re_qa_subject
+break
+
+when "9", "9.", "9. Exit", "Exit"
   puts ""
   puts "Goodbye." 
   break
