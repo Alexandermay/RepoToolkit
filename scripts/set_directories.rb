@@ -1,4 +1,4 @@
-module SetInitialDirectories
+module SetDirectories
   def initialize
     require 'fileutils'
     @path_to_copy = File.expand_path("~/Library")
@@ -12,7 +12,7 @@ module SetInitialDirectories
     Dir.chdir(@copy_of_directory)
     self
   end
-  def finish
+  def close_directories
     FileUtils.remove_entry @user_directory
     FileUtils.copy_entry @copy_of_directory, @user_directory
     FileUtils.remove_dir @copy_of_directory

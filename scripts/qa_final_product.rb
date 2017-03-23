@@ -1,6 +1,6 @@
 module QA 
   require './set_directories.rb'
-  include SetInitialDirectories
+  include SetDirectories
  def qa_it
   puts "Would you like to open the tranformed xml?"
   print @prompt

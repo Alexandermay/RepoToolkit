@@ -1,17 +1,16 @@
 module CreateSubdirectories
-  def scholarship_folders
+  def excel_subfolders
     Dir.mkdir("xml")
     Dir.mkdir("excel")
+    if !Dir.glob('*.pdf').empty?
     Dir.mkdir("pdf")
-    self
-  end
-  def trove_folders
-    Dir.mkdir("xml")
-    Dir.mkdir("excel")
+    end
+    if !Dir.glob('*.tif').empty?
     Dir.mkdir("tif")
+    end
     self
   end
-  def springer_folders
+  def springer_subfolders
     Dir.mkdir("xml")
     Dir.mkdir("xml/springer_original_xml")
     Dir.mkdir("pdf")
@@ -19,7 +18,7 @@ module CreateSubdirectories
     Dir.mkdir("springer")
     self
   end 
-  def proquest_folders
+  def proquest_subfolders
     Dir.mkdir("xml")
     Dir.mkdir("pdf")
     Dir.mkdir("zip")

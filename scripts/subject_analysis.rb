@@ -1,6 +1,6 @@
 module AnalyzeIt
   require './set_directories.rb'
-  include SetInitialDirectories
+  include SetDirectories
   def re_qa_subject
     puts "Would you like to open the new analysis?"
     print @prompt

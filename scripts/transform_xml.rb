@@ -1,10 +1,6 @@
 module Transforms
-  def extract_scholarship
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./firstTransform.xml -xsl:../../../Desktop/RepoToolkit/transforms/extractExcel_faculty.xslt -o:./workWithThis.xml`
-    self
-  end
-  def extract_trove
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./firstTransform.xml -xsl:../../../Desktop/RepoToolkit/transforms/extractExcel_trove.xslt -o:./workWithThis.xml`
+  def transform_excel
+    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./firstTransform.xml -xsl:../../../Desktop/RepoToolkit/transforms/extract_excel.xslt -o:./workWithThis.xml`
     self
   end
   def to_faculty

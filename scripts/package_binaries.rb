@@ -1,67 +1,69 @@
 module PackageBinaries
-def gobble_xml
+  require './set_directories.rb'
+  include SetDirectories
+def package_it_up
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.xml').empty?
     FileUtils.mv Dir.glob('**/*.xml'),'xml'
-      Dir.chdir("xml") 
-      Dir.entries('.').each do |entry|
-      puts entry
-    end
-    self
-end
-def gobble_subjects
-  Dir.chdir("..")
-    FileUtils.mv Dir.glob('subjects.txt'),'xml'
-      Dir.chdir("xml") 
-      Dir.entries('.').each do |entry|
-      puts entry
-    end
-    self
-end
-  def gobble_excel
-    Dir.chdir("..")
-      FileUtils.mv Dir.glob('**/*.xlsx'),'excel'
-        Dir.chdir("excel") 
-        Dir.entries('.').each do |entry|
-        puts entry
-      end
-      self
-  end
-  def gobble_pdf
-    Dir.chdir("..")
-      FileUtils.mv Dir.glob('**/*.pdf'),'pdf'
-        Dir.chdir("pdf") 
-        Dir.entries('.').each do |entry|
-        puts entry
-    end
-    self
-  end
-  def gobble_tif
-    Dir.chdir("..")
-      FileUtils.mv Dir.glob('**/*.tif'),'tif'
-        Dir.chdir("tif") 
-        Dir.entries('.').each do |entry|
-        puts entry
-    end
-    self
-  end
-  def gobble_springer_xml
-    FileUtils.mv Dir.glob('**/*.Meta'),'xml'
-    Dir.chdir("xml")
+    Dir.chdir("xml") 
     Dir.entries('.').each do |entry|
-      puts entry
-       if m = entry.match('\d.*\.xml\.Meta')
-         File.rename(entry, entry.gsub(".Meta", ""))
-          puts "changed!"
-            end
-  end
-  self
+    puts entry
 end
-  def gobble_zip
-    Dir.chdir("..")
-      FileUtils.mv Dir.glob('**/*.zip'),'zip'
-        Dir.chdir("zip") 
-        Dir.entries('.').each do |entry|
-        puts entry
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.txt').empty?
+    FileUtils.mv Dir.glob('subjects.txt'),'xml'
+    Dir.chdir("xml") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.xlsx').empty?
+    FileUtils.mv Dir.glob('**/*.xlsx'),'excel'
+    Dir.chdir("excel") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.pdf').empty?
+    FileUtils.mv Dir.glob('**/*.pdf'),'pdf'
+    Dir.chdir("pdf") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.tif').empty?
+    FileUtils.mv Dir.glob('**/*.tif'),'tif'
+    Dir.chdir("tif") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.Meta').empty?
+    FileUtils.mv Dir.glob('**/*.Meta'),'xml'
+    Dir.chdir("xml") 
+    Dir.entries('.').each do |entry|    
+    puts entry
+    if m = entry.match('\d.*\.xml\.Meta')
+    File.rename(entry, entry.gsub(".Meta", ""))
+    puts "changed!"
     end
-    self
-  end
 end
+end
+Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.zip').empty?
+    FileUtils.mv Dir.glob('**/*.zip'),'zip'
+    Dir.chdir("zip") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+Dir.chdir(@copy_of_directory)
+end
+self
+end
+end
+

@@ -1,7 +1,7 @@
 #Superclass
 class Tufts_Scholarship
   require './set_directories.rb'
-  include SetInitialDirectories
+  include SetDirectories
   require './set_subdirectories.rb'
   include CreateSubdirectories
   require './create_collection_xml.rb'
@@ -15,23 +15,38 @@ class Tufts_Scholarship
   require './qa_final_product.rb'  
   include QA
 end
-#Childern of the superclass
+#Children of the superclass
 class Excel_Based_Ingest < Tufts_Scholarship
   require './excel_to_roo.rb'
   include ToRoo
   def extract_it
-    scholarship_folders.roo_to_xml.extract_scholarship.create_collection
-  end
-  def package_it
-    gobble_xml.gobble_subjects.gobble_excel
-  end
+    excel_subfolders.roo_to_xml.transform_excel.create_collection
+  end  
   def finish_it
-    clean_excel.finish.qa_it
+    clean_excel.close_directories.qa_it
   end
 end
-class Zip_Based_Ingest < Tufts_Scholarship
+class Springer_Ingest < Tufts_Scholarship
   require './unzip_directories.rb'
   include UnzipIt
+  require './springer_specific.rb'
+  include Springer_Issues
+  def transform_it
+    rename_springer_xml.create_collection.to_springer
+  end
+  def finish_it
+    close_directories.qa_it
+  end 
+end
+class Proquest_Ingest < Tufts_Scholarship
+  require './unzip_directories.rb'
+  include UnzipIt
+  def transform_it
+    create_collection.to_proquest
+  end
+  def finish_it
+    clean_proquest.close_directories.qa_it
+  end
 end
 class Subject_Analysis < Tufts_Scholarship
   require './subject_analysis.rb'
@@ -64,42 +79,42 @@ when "1","1.","Faculty"
     puts
     puts "Launching the Faculty Scholarship script."
     a_new_faculty_ingest = Excel_Based_Ingest.new
-    a_new_faculty_ingest.extract_it.to_faculty.package_it.gobble_pdf.finish_it
+    a_new_faculty_ingest.extract_it.to_faculty.package_it_up.finish_it
     break
 
 when "2","2.","Student"
     puts
     puts "Launching the Student Scholarship script."
     a_new_student_ingest = Excel_Based_Ingest.new
-    a_new_student_ingest.extract_it.to_student.package_it.gobble_pdf.finish_it
+    a_new_student_ingest.extract_it.to_student.package_it_up.finish_it
     break
 
 when "3","3.","Nutrition"
     puts
     puts "Launching the Nutrtion Scholarship script."
     a_new_nutrition_ingest = Excel_Based_Ingest.new
-    a_new_nutrition_ingest.extract_it.to_nutrition.package_it.gobble_pdf.finish_it
+    a_new_nutrition_ingest.extract_it.to_nutrition.package_it_up.finish_it
     break
 
 when "4","4.","Trove"
     puts
     puts "Launching the Trove script."
     a_new_trove_ingest = Excel_Based_Ingest.new
-    a_new_trove_ingest.trove_folders.roo_to_xml.extract_trove.create_collection.to_trove.package_it.gobble_tif.finish_it
+    a_new_trove_ingest.extract_it.to_trove.package_it_up.finish_it
     break
     
 when "5","5.","Springer"
     puts
     puts "Launching the Springer script."
-    a_new_springer_ingest = Zip_Based_Ingest.new
-    a_new_springer_ingest.springer_folders.unzip.gobble_springer_xml.create_collection.to_springer.gobble_pdf.gobble_zip.gobble_springer.clean_springer.finish.qa_it
+    a_new_springer_ingest = Springer_Ingest.new
+    a_new_springer_ingest.springer_subfolders.unzip.transform_it.package_springer_up.finish_it
 break
 
 when "6","6.","Proquest"
     puts
     puts "Launching the Proquest script."
-    a_new_proquest_ingest = Zip_Based_Ingest.new
-    a_new_proquest_ingest.proquest_folders.unzip.create_collection.to_proquest.gobble_xml.gobble_subjects.gobble_pdf.gobble_zip.clean_proquest.finish.qa_it
+    a_new_proquest_ingest = Proquest_Ingest.new
+    a_new_proquest_ingest.proquest_subfolders.unzip.transform_it.package_it_up.finish_it
 break
 
 when "7","7.","inHouse"

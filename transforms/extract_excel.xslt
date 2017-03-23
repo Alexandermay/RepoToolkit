@@ -14,7 +14,7 @@
                 <Title><xsl:value-of select="current-group()[@column = '2']"/></Title>
                 <Alternative_Title><xsl:value-of select="current-group()[@column = '3']"/></Alternative_Title>
                 <Creator><xsl:value-of select="current-group()[@column = '4']"/></Creator>
-                <Contributor><xsl:value-of select="current-group()[@column = '5']"/></Contributor>
+                <Contributors><xsl:value-of select="current-group()[@column = '5']"/></Contributors>
                 <Description><xsl:value-of select="current-group()[@column = '6']"/></Description>
                 <Source><xsl:value-of select="current-group()[@column = '7']"/></Source>
                 <Date_Created><xsl:value-of select="current-group()[@column = '8']"/></Date_Created>
@@ -27,6 +27,8 @@
                 <Genre><xsl:value-of select="current-group()[@column = '15']"/></Genre>
                 <Century><xsl:value-of select="current-group()[@column = '16']"/></Century>
                 <Spatial><xsl:value-of select="current-group()[@column = '17']"/></Spatial>
+                <Rights><xsl:value-of select="current-group()[@column = '18']"/></Rights>
+                <Embargo><xsl:value-of select="current-group()[@column = '19']"/></Embargo>
             </row>
             
         </xsl:for-each-group>
