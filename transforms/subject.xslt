@@ -63,6 +63,14 @@
                 </xsl:for-each>
             </xsl:for-each>
         </xsl:variable>
+        <xsl:variable name="date">
+            <xsl:for-each select="//dc:date.created">
+                <xsl:sort select="self::dc:date.created"/>
+                <xsl:for-each select="self::dc:date.created[not(.=following::dc:date.created)]">
+                    <xsl:value-of select="replace(.,'(\w$|\W$)','$1&#xD;')"/>
+                </xsl:for-each>
+            </xsl:for-each>
+        </xsl:variable>
         
         <xsl:template match="/">             
 Terms recently used
@@ -75,6 +83,9 @@ Names:
             Contributors
 
 <xsl:value-of select="$contribname"/>
+            Dates
+            
+<xsl:value-of select="$date"/>
             
             Personal names as subject
             
