@@ -130,7 +130,7 @@ when "8","8.","Subject"
     puts
     puts "Launching the Subject Analysis script"
     a_new_analysis = Subject_Analysis.new
-    a_new_analysis.subject_only.finish.re_qa_subject
+    a_new_analysis.subject_only.close_directories.re_qa_subject
 break
 
 when "9", "9.", "9. Exit", "Exit"
