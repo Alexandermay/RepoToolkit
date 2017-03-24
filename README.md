@@ -11,35 +11,35 @@ Currently set for a very localized MacOS environment.
 
 1. Make sure you have Ruby (at least 2.0.0)
 
-        `$ ruby -v` 
+         $ ruby -v
  
 2. If you don’t have Java, install it with [Homebrew](https://brew.sh/):
 
-        `$ brew cask install java`
+         $ brew cask install java
 
 3. Download the latest version of [Saxon-HE](https://sourceforge.net/projects/saxon/files/) from [Saxonica](http://www.saxonica.com/download/opensource.xml) and put it in your Applications folder. Make sure the jar file we need to run the transforms is in the following path.
 
-        `//Applications/SaxonHE9-7-0-15J/saxon9he.jar`
+         //Applications/SaxonHE9-7-0-15J/saxon9he.jar
 
 4. Install [roo](https://github.com/roo-rb/roo) as a gem:
 
-        `$ gem install roo`
+         $ gem install roo
         
 5. Change your directory to your Desktop.
 
-        `$ cd Desktop`
+         $ cd Desktop
         
 6. Clone the ToolKit
 
-        `$ git clone https://github.com/Alexandermay/RepoToolkit.git`
+         $ git clone https://github.com/Alexandermay/RepoToolkit.git
  
 7. Change directory from Desktop to RepoToolKit\scripts
 
-        `$ cd RepoToolKit\scripts`
+         $ cd RepoToolKit\scripts
         		  
 8. Run the launcher.rb
 
-        `$ ruby launcher.rb`
+         $ ruby launcher.rb
 
 9. You should now see a welcome screen with a list of options.
 
@@ -56,9 +56,9 @@ Currently set for a very localized MacOS environment.
 
 10.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
 
-        `Launching the Faculty Scholarship script.`
-        `What is the directory you are working with?`
-        `>`
+         Launching the Faculty Scholarship script.
+         What is the directory you are working with?
+         >
 
 +   At the prompt (`>`) enter the absolute path to the `sample_set` directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
