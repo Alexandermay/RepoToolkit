@@ -29,7 +29,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
             xmlns:rel="info:fedora/fedora-system:def/relations-external#">
           
          
-            <xsl:for-each select="collection('../../../Library/TempRepo/Directory/xml/collection.xml')">
+            <xsl:for-each select="collection('../../RepoToolKit/TempRepo/xml/collection.xml')">
          
                 <digitalObject>
                     <file><xsl:value-of select=".//JournalInfo/JournalID"/>_<xsl:value-of select="//RegistrationDate/Year"/>_Article_<xsl:value-of select="//ArticleID"/>.pdf</file>

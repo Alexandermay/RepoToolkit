@@ -20,6 +20,7 @@ module CreateSubdirectories
   end 
   def proquest_subfolders
     Dir.mkdir("xml")
+     Dir.mkdir("xml/proquest_original_xml")
     Dir.mkdir("pdf")
     Dir.mkdir("zip")
     self

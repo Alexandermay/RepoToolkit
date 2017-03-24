@@ -27,7 +27,7 @@ if !Dir.glob('*.xlsx').empty?
 end
 end
 Dir.chdir(@copy_of_directory)
-if !Dir.glob('*.pdf').empty?
+if !Dir.glob('**/*.pdf').empty?
     FileUtils.mv Dir.glob('**/*.pdf'),'pdf'
     Dir.chdir("pdf") 
     Dir.entries('.').each do |entry|
