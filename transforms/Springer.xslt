@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-
 <!--    
 CREATED BY: Alex May, Tisch Library
-CREATED ON: 2016-05-11
-UPDATED ON: 2016-05-16
+CREATED ON: 2017-03-31
+UPDATED ON: 2017-03-31
 This stylesheet converts Springer metadata to qualified Dublin Core based on the mappings found in the MIRA data dictionary.-->
 <!--Name space declarations and XSLT version -->
-
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
     <!--This changes the output to xml -->
     <xsl:output method="xml" indent="yes" use-character-maps="killSmartPunctuation" encoding="UTF-8"/>
     <xsl:character-map name="killSmartPunctuation">
@@ -18,7 +17,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
         <xsl:output-character character="‘" string="'"/>
         <xsl:output-character character="&#x2013;" string="-"/>
     </xsl:character-map>
-    <!-- this starts the crosswalk-->
+<!-- this starts the crosswalk-->
     <xsl:template match="/">
         <input xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"
@@ -27,121 +26,111 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
             xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
             xmlns:ac="http://purl.org/dc/dcmitype/"
             xmlns:rel="info:fedora/fedora-system:def/relations-external#">
-          
-         
             <xsl:for-each select="collection('../../RepoToolKit/TempRepo/xml/collection.xml')">
-         
                 <digitalObject>
-                    <file><xsl:value-of select=".//JournalInfo/JournalID"/>_<xsl:value-of select="//RegistrationDate/Year"/>_Article_<xsl:value-of select="//ArticleID"/>.pdf</file>
-                    <!-- this portion crosswalks the rel:hasModel for pdfs as bolierplate -->
+                    <xsl:call-template name="file"/>
                     <rel:hasModel>info:fedora/cm:Text.PDF</rel:hasModel>
-                    <!-- this portion crosswalks the MARC uniform title to the dc:title element, if a 240 does not exist, it croswallks the 245 -->
-                    <dc:title>
-                        <xsl:value-of
-                            select="normalize-space(replace(//ArticleTitle,'\.+$',''))"
-                        /><xsl:text>.</xsl:text>
-                    </dc:title>
-                    <!-- this portion crosswalks the MARC main author entry to the dc:creator element -->
-                    <xsl:for-each
-                        select="//Author">
-                        <xsl:choose>
-                            <xsl:when test=".//GivenName[2]">
-                                <dc:creator><xsl:value-of select="normalize-space(.//FamilyName)"/>, <xsl:value-of select="normalize-space(.//GivenName[1])"/><xsl:text> </xsl:text><xsl:value-of select="normalize-space(replace(.//GivenName[2],'\.+$',''))"/><xsl:text>.</xsl:text></dc:creator>
-                            </xsl:when>
-                        <xsl:otherwise>
-                            <dc:creator><xsl:value-of select="normalize-space(.//FamilyName)"/>, <xsl:value-of select="normalize-space(.//GivenName[1])"/><xsl:text>.</xsl:text></dc:creator>
-                        </xsl:otherwise> 
-                        </xsl:choose>                      
-                    </xsl:for-each>
-                    <xsl:choose>
-                        <xsl:when test="//AbstractSection[@ID]/Heading">
-                            <dc:description>  
-                                <xsl:value-of select=".//AbstractSection[@ID][1]/Heading"/>: <xsl:value-of
-                                    select=".//AbstractSection[@ID][1]/Para[1]"/> 
-                            </dc:description>  
-                        </xsl:when>
-                        <xsl:when test="//Abstract/Heading">
-                            <dc:description>  
-                                <xsl:value-of select=".//Abstract/Heading"/>: <xsl:value-of
-                                    select="normalize-space(.//Abstract[1]/Para[1])"/></dc:description>  
-                        </xsl:when>
-                        <xsl:otherwise/>    
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test=".//KeywordGroup/Heading">
-                            <dc:description>
-                                <xsl:value-of select=".//KeywordGroup/Heading"/>: <xsl:for-each select=".//Keyword[not(position()=last())]"><xsl:value-of select="normalize-space(.)"/><xsl:text>, </xsl:text></xsl:for-each>
-                                <xsl:if test=".//Keyword[last()]">
-                                    <xsl:value-of select="normalize-space(.//Keyword[last()])"/><xsl:text>.</xsl:text>
-                                </xsl:if>
-                            </dc:description> 
-                        </xsl:when>
-                        <xsl:when test=".//KeywordGroup">
-                            <dc:description>
-                               <xsl:text>Keywords: </xsl:text><xsl:for-each select=".//Keyword[not(position()=last())]"><xsl:value-of select="normalize-space(.)"/><xsl:text>, </xsl:text></xsl:for-each>
-                                <xsl:if test=".//Keyword[last()]">
-                                    <xsl:value-of select="normalize-space(.//Keyword[last()])"/><xsl:text>.</xsl:text>
-                                </xsl:if>
-                            </dc:description> 
-                        </xsl:when>
-                        <xsl:when test=".//AbbreviationGroup">
-                            <dc:description>  
-                                <xsl:text>Keywords: </xsl:text><xsl:for-each select=".//AbbreviationGroup/DefinitionList/DefinitionListEntry[not(position()=last())]"><xsl:value-of select="normalize-space(.//Para)"/><xsl:text>, </xsl:text></xsl:for-each>
-                                <xsl:if test=".//AbbreviationGroup/DefinitionList/DefinitionListEntry[position()=last()]">
-                                    <xsl:value-of select="normalize-space(replace(.//AbbreviationGroup/DefinitionList/DefinitionListEntry[last()]/Description/Para,'\.+$',''))"/><xsl:text>.</xsl:text>
-                                </xsl:if>
-                            </dc:description>  
-                        </xsl:when>
-                        <xsl:otherwise/>
-                    </xsl:choose>
+                    <xsl:call-template name="title"/>
+                    <xsl:call-template name="creator"/>
+                    <xsl:call-template name="abstract"/>
+                    <xsl:call-template name="keywords"/>
                     <dc:description>Springer Open.</dc:description>
-                    <!--
-                    <dc:bibliographicCitation>
-                        <xsl:value-of select="//AuthorGroup/Author[1]/AuthorName[1]/FamilyName[1]"/>, <xsl:value-of select="//AuthorGroup/Author[1]/AuthorName[1]/GivenName[1]"/><xsl:text>, </xsl:text>
-                        <xsl:for-each
-                            select="//Author[position()>1][not(position()=last())]"><xsl:value-of select="replace(.//GivenName[1],'(^\w$)','$1.')"/><xsl:text> </xsl:text><xsl:if test=".//GivenName[2]"><xsl:value-of select="replace(.//GivenName[2],'(^\w$)','$1.')"/><xsl:text> </xsl:text></xsl:if><xsl:value-of select=".//FamilyName"/><xsl:text>, </xsl:text></xsl:for-each>
-                        <xsl:if test=".//Author[position()>1][last()]">
-                            <xsl:text>and </xsl:text><xsl:value-of select="//Author[last()]/AuthorName/replace(GivenName[1],'(^\w$)','$1.')"/><xsl:text> </xsl:text><xsl:if test="//Author[last()]/AuthorName/GivenName[2]"><xsl:value-of select="replace(//Author[last()]/AuthorName/GivenName[2],'(^\w$)','$1.')"/><xsl:text> </xsl:text></xsl:if><xsl:value-of select=".//Author[last()]/AuthorName/FamilyName"/><xsl:text>. </xsl:text>
-                        </xsl:if>
-                        <xsl:text>"</xsl:text><xsl:value-of
-                            select="normalize-space(//ArticleTitle)"
-                        /><xsl:text>." </xsl:text>
-                       <xsl:value-of select=".//JournalTitle"/><xsl:text> </xsl:text><xsl:value-of
-                           select=".//VolumeInfo/VolumeIDStart"/><xsl:text>, no. </xsl:text><xsl:value-of select=".//VolumeIssueCount"/><xsl:text> </xsl:text><xsl:text>(</xsl:text><xsl:value-of select=".//CoverDate/Month"/><xsl:text>, </xsl:text> <xsl:value-of select=".//CoverDate/Year"/><xsl:text>): </xsl:text> <xsl:value-of select=".//ArticleInfo/ArticleFirstPage"/><xsl:text>-</xsl:text><xsl:value-of select=".//ArticleInfo/ArticleLastPage"/><xsl:text>.</xsl:text>
-                    </dc:bibliographicCitation>
-                    -->
-                    <!-- this portion crosswalks the Excel element source to the dc:source element -->
                     <dcterms:isPartOf>Tufts University faculty scholarship.</dcterms:isPartOf>
-                    <!-- this portion inserts boilerplate for the dc:rights element: per Alicia we want to use creative commons for this type of content 
-                    <dc:rights>http://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>-->  
-                    <!-- this portion inserts the license element -->
-                    <xsl:choose>
-                    <xsl:when test=".//ArticleCopyright/CopyrightComment/SimplePara/ExternalRef[1]/RefTarget[1]/@Address">
-                        <dc:rights><xsl:value-of select=".//ArticleCopyright/CopyrightComment/SimplePara/ExternalRef[1]/RefTarget[1]/@Address"/></dc:rights> </xsl:when>
-                        <xsl:otherwise>
-                            <dc:rights><xsl:value-of select=".//License/SimplePara/ExternalRef[1]/RefTarget[1]/@Address"/></dc:rights> 
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <!-- this portion inserts the date created element -->
-                    <dc:date.created>
-                        <xsl:value-of select=".//OnlineDate/Year"/>
-                    </dc:date.created>
-                    <!-- this portion inserts the type and format boilerplate -->
+                    <xsl:call-template name="rights"/>
+                    <xsl:call-template name="date"/>
                     <dc:type>Text</dc:type>
                     <dc:format>application/pdf</dc:format>
-                    <!-- this portion inserts the boilerplate steward information -->
                     <admin:steward>tisch</admin:steward>
-                    <!-- this portion inserts the boilerplate batch template information -->
                     <ac:name>amay02</ac:name>
                     <ac:comment>SpringerBatchTransform: <xsl:value-of
-                            select="current-dateTime()"/></ac:comment>
+                        select="current-dateTime()"/></ac:comment>
                     <admin:createdby>externalXSLT</admin:createdby>
-                    <!-- this portion inserts the boilerplate batch displays information -->
                     <admin:displays>dl</admin:displays>
                 </digitalObject>
-                
             </xsl:for-each>
-            
         </input>
+    </xsl:template>
+    <xsl:template match="//JournalInfo" name="file">
+        <file><xsl:value-of select="//JournalInfo/JournalID"/>_<xsl:value-of
+                select="//RegistrationDate/Year"/>_Article_<xsl:value-of select="//ArticleID"
+            />.pdf</file>
+    </xsl:template>
+    <xsl:template match="//ArticleTitle" name="title">
+        <dc:title>
+            <xsl:value-of select="replace(//ArticleTitle, '\.+$', '')"/>
+            <xsl:text>.</xsl:text>
+        </dc:title>
+    </xsl:template>
+    <xsl:template match="//Author" name="creator">
+        <xsl:for-each
+            select="//Author">
+            <xsl:choose>
+                <xsl:when test=".//GivenName[2]">
+                    <dc:creator><xsl:value-of select="normalize-space(.//FamilyName)"/>, <xsl:value-of select="normalize-space(.//GivenName[1])"/><xsl:text> </xsl:text><xsl:value-of select="normalize-space(replace(.//GivenName[2],'\.+$',''))"/><xsl:text>.</xsl:text></dc:creator>
+                </xsl:when>
+                <xsl:otherwise>
+                    <dc:creator><xsl:value-of select="normalize-space(.//FamilyName)"/>, <xsl:value-of select="normalize-space(.//GivenName[1])"/><xsl:text>.</xsl:text></dc:creator>
+                </xsl:otherwise> 
+            </xsl:choose>                      
+        </xsl:for-each>
+    </xsl:template>
+    <xsl:template name="abstract">
+        <xsl:choose>
+            <xsl:when test="//AbstractSection[@ID]/Heading">
+                <dc:description>  
+                    <xsl:value-of select=".//AbstractSection[@ID][1]/Heading"/>: <xsl:value-of
+                        select=".//AbstractSection[@ID][1]/Para[1]"/> 
+                </dc:description>  
+            </xsl:when>
+            <xsl:when test="//Abstract/Heading">
+                <dc:description>  
+                    <xsl:value-of select=".//Abstract/Heading"/>: <xsl:value-of
+                        select="normalize-space(.//Abstract[1]/Para[1])"/></dc:description>  
+            </xsl:when>
+            <xsl:otherwise/>    
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="keywords">
+        <xsl:choose>
+            <xsl:when test=".//KeywordGroup/Heading">
+                <dc:description>
+                    <xsl:value-of select=".//KeywordGroup/Heading"/>: <xsl:for-each select=".//Keyword[not(position()=last())]"><xsl:value-of select="normalize-space(.)"/><xsl:text>, </xsl:text></xsl:for-each>
+                    <xsl:if test=".//Keyword[last()]">
+                        <xsl:value-of select="normalize-space(.//Keyword[last()])"/><xsl:text>.</xsl:text>
+                    </xsl:if>
+                </dc:description> 
+            </xsl:when>
+            <xsl:when test=".//KeywordGroup">
+                <dc:description>
+                    <xsl:text>Keywords: </xsl:text><xsl:for-each select=".//Keyword[not(position()=last())]"><xsl:value-of select="normalize-space(.)"/><xsl:text>, </xsl:text></xsl:for-each>
+                    <xsl:if test=".//Keyword[last()]">
+                        <xsl:value-of select="normalize-space(.//Keyword[last()])"/><xsl:text>.</xsl:text>
+                    </xsl:if>
+                </dc:description> 
+            </xsl:when>
+            <xsl:when test=".//AbbreviationGroup">
+                <dc:description>  
+                    <xsl:text>Keywords: </xsl:text><xsl:for-each select=".//AbbreviationGroup/DefinitionList/DefinitionListEntry[not(position()=last())]"><xsl:value-of select="normalize-space(.//Para)"/><xsl:text>, </xsl:text></xsl:for-each>
+                    <xsl:if test=".//AbbreviationGroup/DefinitionList/DefinitionListEntry[position()=last()]">
+                        <xsl:value-of select="normalize-space(replace(.//AbbreviationGroup/DefinitionList/DefinitionListEntry[last()]/Description/Para,'\.+$',''))"/><xsl:text>.</xsl:text>
+                    </xsl:if>
+                </dc:description>  
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template name="rights">
+        <xsl:choose>
+            <xsl:when test=".//ArticleCopyright/CopyrightComment/SimplePara/ExternalRef[1]/RefTarget[1]/@Address">
+                <dc:rights><xsl:value-of select=".//ArticleCopyright/CopyrightComment/SimplePara/ExternalRef[1]/RefTarget[1]/@Address"/></dc:rights> </xsl:when>
+            <xsl:otherwise>
+                <dc:rights><xsl:value-of select=".//License/SimplePara/ExternalRef[1]/RefTarget[1]/@Address"/></dc:rights> 
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match = "//OnlineDate/Year" name ="date">
+        <dc:date.created>
+            <xsl:value-of select=".//OnlineDate/Year"/>
+        </dc:date.created>
     </xsl:template>
 </xsl:stylesheet>

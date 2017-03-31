@@ -326,11 +326,11 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
                     <dc:type>Text</dc:type>
                     <dc:format>application/pdf</dc:format>
                     <!-- this portion inserts the boilerplate steward information -->
-                    <admin:steward>tisch</admin:steward>
+                    <admin:steward>dca</admin:steward>
                     <!-- this portion inserts the boilerplate batch template information -->
                     <ac:name>amay02</ac:name>
                     <ac:comment>ProquestProvisionalBatchTransform2016: <xsl:value-of
-                            select="current-dateTime()"/></ac:comment>
+                            select="current-dateTime()"/>; Tisch and DCA allowed to manage metadata and binary.</ac:comment>
                     <admin:createdby>externalXSLT</admin:createdby>
                     <!-- this portion inserts the boilerplate batch displays information -->
                     <xsl:choose>
