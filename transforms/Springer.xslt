@@ -7,7 +7,8 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
 <!--Name space declarations and XSLT version -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
-    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/">
     <!--This changes the output to xml -->
     <xsl:output method="xml" indent="yes" use-character-maps="killSmartPunctuation" encoding="UTF-8"/>
     <xsl:character-map name="killSmartPunctuation">

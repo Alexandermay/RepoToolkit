@@ -2,7 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
     <xsl:output method="xml"/>
-    
     <xsl:template match="sheet">
         <root>
             <xsl:for-each-group select="cell[not(@row = '1')]" group-by="@row">
@@ -29,10 +28,8 @@
                 <Spatial><xsl:value-of select="current-group()[@column = '17']"/></Spatial>
                 <Rights><xsl:value-of select="current-group()[@column = '18']"/></Rights>
                 <Embargo><xsl:value-of select="current-group()[@column = '19']"/></Embargo>
-            </row>
-            
+            </row>  
         </xsl:for-each-group>
         </root>
     </xsl:template>
-
 </xsl:stylesheet>
