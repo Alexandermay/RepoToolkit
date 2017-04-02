@@ -45,7 +45,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
                     <ac:name>amay02</ac:name>
                     <ac:comment>SpringerBatchTransform: <xsl:value-of
                         select="current-dateTime()"/></ac:comment>
-                    <admin:createdby>externalXSLT</admin:createdby>
+                    <admin:createdby>Tisch metadata staff.</admin:createdby>
                     <admin:displays>dl</admin:displays>
                 </digitalObject>
             </xsl:for-each>

@@ -83,6 +83,7 @@ Names:
             Contributors
 
 <xsl:value-of select="$contribname"/>
+            
             Dates
             
 <xsl:value-of select="$date"/>

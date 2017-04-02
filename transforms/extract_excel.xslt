@@ -28,6 +28,7 @@
                 <Spatial><xsl:value-of select="current-group()[@column = '17']"/></Spatial>
                 <Rights><xsl:value-of select="current-group()[@column = '18']"/></Rights>
                 <Embargo><xsl:value-of select="current-group()[@column = '19']"/></Embargo>
+                <Process><xsl:value-of select="//Process"/></Process>
             </row>  
         </xsl:for-each-group>
         </root>
