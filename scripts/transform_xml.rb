@@ -3,24 +3,9 @@ module Transforms
     `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./firstTransform.xml -xsl:../../RepoToolkit/transforms/extract_excel.xslt -o:./workWithThis.xml`
     self
   end
-  def transform_it_faculty
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:collection.xml -xsl:../../RepoToolkit/transforms/Faculty.xslt -o:./ingestThis.xml`
+  def transform_it
+    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:collection.xml -xsl:../../RepoToolkit/transforms/excel_to_dc.xslt -o:./ingestThis.xml`
     `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
-    self
-  end
-  def transform_it_student
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:collection.xml -xsl:../../RepoToolkit/transforms/Student.xslt -o:./ingestThis.xml`
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:ingestThis.xml -xsl:../../RepoToolkit/transforms/transforms/subject.xslt -o:./subjects.txt`
-    self
-  end
-  def transform_it_trove
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./collection.xml -xsl:../../RepoToolkit/transforms/Trove.xslt -o:./ingestThis.xml`
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
-    self
-  end
-  def transform_it_nutrition
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./collection.xml -xsl:../../RepoToolkit/transforms/Nutrition.xslt -o:./ingestThis.xml`
-    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:./ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
     self
   end
   def transform_it_springer

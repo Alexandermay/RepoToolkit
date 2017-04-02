@@ -20,7 +20,7 @@ class Excel_Based_Ingest < Tufts_Scholarship
   require './excel_to_roo.rb'
   include ToRoo
   def extract_it
-    excel_subfolders.roo_to_xml.transform_excel.create_collection
+    excel_subfolders
   end  
   def finish_it
     postprocess_excel_xml.close_directories.qa_it
@@ -83,28 +83,28 @@ when "1","1.","Faculty"
     puts
     puts "Launching the Faculty Scholarship script."
     a_new_faculty_ingest = Excel_Based_Ingest.new
-    a_new_faculty_ingest.extract_it.transform_it_faculty.package_it_up.finish_it
+    a_new_faculty_ingest.extract_it.roo_to_xml.with_faculty_process.transform_excel.create_collection.transform_it.package_it_up.finish_it
     break
 
 when "2","2.","Student"
     puts
     puts "Launching the Student Scholarship script."
     a_new_student_ingest = Excel_Based_Ingest.new
-    a_new_student_ingest.extract_it.transform_it_student.package_it_up.finish_it
+    a_new_student_ingest.extract_it.roo_to_xml.with_student_process.transform_excel.create_collection.transform_it.package_it_up.finish_it
     break
 
 when "3","3.","Nutrition"
     puts
     puts "Launching the Nutrtion Scholarship script."
     a_new_nutrition_ingest = Excel_Based_Ingest.new
-    a_new_nutrition_ingest.extract_it.transform_it_nutrition.package_it_up.finish_it
+    a_new_nutrition_ingest.extract_it.roo_to_xml.with_nutrition_process.transform_excel.create_collection.transform_it.package_it_up.finish_it
     break
 
 when "4","4.","Trove"
     puts
     puts "Launching the Trove script."
     a_new_trove_ingest = Excel_Based_Ingest.new
-    a_new_trove_ingest.extract_it.transform_it_trove.package_it_up.finish_it
+    a_new_trove_ingest.extract_it.roo_to_xml.with_trove_process.transform_excel.create_collection.transform_it.package_it_up.finish_it
     break
     
 when "5","5.","Springer"
