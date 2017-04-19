@@ -18,6 +18,11 @@ module Transforms
     `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
     self
   end
+  def transform_it_inhouse
+    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:inHouse.xml -xsl:../../RepoToolkit/transforms/inhouse.xslt -o:./ingestThis.xml`
+    `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:./subjects.txt`
+    self
+  end
   def subject_only
     `java -cp //Applications/SaxonHE9-7-0-15J/saxon9he.jar net.sf.saxon.Transform -t -s:xml/ingestThis.xml -xsl:../../RepoToolkit/transforms/subject.xslt -o:xml/subject_update.txt`
      self

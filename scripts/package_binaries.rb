@@ -43,6 +43,14 @@ if !Dir.glob('*.tif').empty?
 end
 end
 Dir.chdir(@copy_of_directory)
+if !Dir.glob('*.mrc').empty?
+    FileUtils.mv Dir.glob('**/*.mrc'),'mrc'
+    Dir.chdir("mrc") 
+    Dir.entries('.').each do |entry|
+    puts entry
+end
+end
+Dir.chdir(@copy_of_directory)
 if !Dir.glob('*.Meta').empty?
     FileUtils.mv Dir.glob('**/*.Meta'),'xml'
     Dir.chdir("xml") 

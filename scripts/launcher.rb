@@ -52,6 +52,19 @@ class Proquest_Ingest < Tufts_Scholarship
     postprocess_proquest_xml.close_directories.qa_it
   end
 end
+class InHouse_Ingest < Tufts_Scholarship
+  require './inhouse.rb'
+  include Rename 
+  def extract_it
+    inhouse_subfolders
+  end 
+  def transform_it
+    transform_it_inhouse
+  end     
+  def finish_it
+    close_directories.qa_it
+  end 
+end
 class Subject_Analysis < Tufts_Scholarship
   require './subject_analysis.rb'
   include AnalyzeIt  
@@ -70,7 +83,7 @@ puts "3. Nutrition School."
 puts "4. Art and Art History (Trove)."
 puts "5. Springer Open Access Articles."
 puts "6. Proquest Electronic Disertations and Theses."
-puts "7. In-House (placeholder only)"
+puts "7. In-House digitized books"
 puts "8. Subject Analysis."
 puts "9. Exit"
 puts
@@ -123,7 +136,9 @@ break
 
 when "7","7.","inHouse"
     puts
-    puts "I'm not ready yet."
+    puts "Launching the in-house script."
+    a_new_inhouse_ingest = InHouse_Ingest.new
+    a_new_inhouse_ingest.extract_it.rename_mrc_xml.transform_it.rename_xml_to_original.package_it_up.finish_it
 break
 
 when "8","8.","Subject"
