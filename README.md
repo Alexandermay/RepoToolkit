@@ -6,6 +6,7 @@ A toolkit for proto-SIP processing at Tisch Library using a Ruby front-end to la
 * Saxon
 * Ruby 2.0.0
 * Roo
+* Nokogiri
 
 Currently set for a very localized MacOS environment.
 
@@ -24,24 +25,26 @@ Currently set for a very localized MacOS environment.
 4. Install [roo](https://github.com/roo-rb/roo) as a gem:
 
          $ gem install roo
-        
-5. Change your directory to your Desktop.
+         
+5. Install [nokogiri](http://www.nokogiri.org/tutorials/installing_nokogiri.html) (Review nokogiri documentation.)
+       
+6. Change your directory to your Desktop.
 
          $ cd Desktop
         
-6. Clone the ToolKit
+7. Clone the ToolKit
 
          $ git clone https://github.com/Alexandermay/RepoToolkit.git
  
-7. Change directory from Desktop to RepoToolKit\scripts
+8. Change directory from Desktop to RepoToolKit\scripts
 
          $ cd RepoToolKit\scripts
         		  
-8. Run the launcher.rb
+9. Run the launcher.rb
 
          $ ruby launcher.rb
 
-9. You should now see a welcome screen with a list of options.
+10. You should now see a welcome screen with a list of options.
 
         
             1. Faculty Scholarship.
@@ -54,7 +57,7 @@ Currently set for a very localized MacOS environment.
             8. Exit
                   
 
-10.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
+11.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
 
          Launching the Faculty Scholarship script.
          What is the directory you are working with?

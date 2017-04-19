@@ -8,8 +8,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"
-    xmlns:dcatech="http://nils.lib.tufts.edu/dcatech/"
+    xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"   
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
     xmlns:ac="http://purl.org/dc/dcmitype/"
@@ -135,7 +134,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
         </dc:description>       
     </xsl:template>
     <xsl:template match ="Source" name="source">
-        <xsl:value-of select="normalize-space(Source)"/> 
+        <dc:source><xsl:value-of select="normalize-space(Source)"/></dc:source>
     </xsl:template>
     <xsl:template match="bibliographicCitation" name="bibliographicCitation">
         <dc:bibliographicCitation>
@@ -153,9 +152,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             <xsl:when test="Process[contains(text(),'Student')]">
                 <dcterms:isPartOf>Tufts University student scholarship.</dcterms:isPartOf>
             </xsl:when>
-            <xsl:otherwise>
-                <dcterms:isPartOf/> 
-            </xsl:otherwise>
+            <xsl:otherwise/>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="abstract" name="abstract"/>

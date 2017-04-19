@@ -364,7 +364,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
     </xsl:template>
     <xsl:template match ="//DISS_comp_date" name="displays">
         <xsl:choose>
-            <xsl:when test="(//DISS_comp_date &lt;= 2011)">
+            <xsl:when test="(//DISS_comp_date &lt; 2011)">
                 <admin:displays>nowhere</admin:displays> 
             </xsl:when>
             <xsl:otherwise>
