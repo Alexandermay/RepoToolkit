@@ -59,7 +59,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="temporal"/>
                     <xsl:call-template name="spatial"/>
                     <xsl:call-template name="license"/>
-                    <dc:rights>http://sites.tufts.edu/dca/research-help/copyright-and-citations/</dc:rights>
+                    <dc:rights>https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
                     <admin:steward>tisch</admin:steward>
                     <ac:name>amay02</ac:name>
                     <xsl:call-template name="admin_comment"/>
