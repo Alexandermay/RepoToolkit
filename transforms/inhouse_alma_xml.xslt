@@ -186,7 +186,7 @@ This will remove any duplicate names which may crop up by removing relator terms
                     <!-- this portion crosswalks the first date from the 008 leader to the date created element, and strips out the remaining numbers and digits -->
                     <dc:date.created>
                         <xsl:for-each select="controlfield[@tag = '008']">
-                            <xsl:value-of select="normalize-space(./replace(., '^.{7}|.{29}$', ''))"
+                            <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s|\w.?.{12}$', ''))"
                             />
                         </xsl:for-each>
                     </dc:date.created>
@@ -287,7 +287,7 @@ This will remove any duplicate names which may crop up by removing relator terms
                     <!-- this portion crosswalks the language from the 008 leader to the language element, and strips out the remaining numbers and digits -->
                     <dcterms:language>
                         <xsl:for-each select="controlfield[@tag = '008']">
-                            <xsl:value-of select="normalize-space(./replace(., '^.{24}|.{2}$', ''))"
+                            <xsl:value-of select="normalize-space(./replace(., '.*?\s0\s|.{2}$', ''))"
                             />
                         </xsl:for-each>
                     </dcterms:language>
