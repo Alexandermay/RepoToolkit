@@ -184,12 +184,24 @@ This will remove any duplicate names which may crop up by removing relator terms
                         </xsl:otherwise>
                     </xsl:choose>
                     <!-- this portion crosswalks the first date from the 008 leader to the date created element, and strips out the remaining numbers and digits -->
-                    <dc:date.created>
-                        <xsl:for-each select="controlfield[@tag = '008']">
-                            <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s|\w.?.{12}$', ''))"
-                            />
-                        </xsl:for-each>
-                    </dc:date.created>
+                    <xsl:choose>
+                        <xsl:when test="controlfield[@tag = '008'][contains(text(), 'm')]">
+                            <dc:date.created>
+                                <xsl:for-each select="controlfield[@tag = '008']">
+                                    <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s|\w.?.{16}$', ''))"
+                                    />
+                                </xsl:for-each>
+                            </dc:date.created> 
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <dc:date.created>
+                                <xsl:for-each select="controlfield[@tag = '008']">
+                                    <xsl:value-of select="normalize-space(./replace(., '^.{7}|\D.*?[^u].{12}$', ''))"
+                                    />
+                                </xsl:for-each>
+                            </dc:date.created> 
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <!-- this portion inserts the boilerplate 'Text' for the type element -->
                     <dc:type>Text</dc:type>
                     <!-- this portion inserts the boilerplate 'application/pdf' for the format element -->

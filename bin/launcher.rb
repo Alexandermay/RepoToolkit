@@ -1,23 +1,25 @@
 #Superclass
 class Tufts_Scholarship
-  require './set_directories.rb'
+  Dir['../lib/*.rb'].each { |f| puts f; require_relative f }
+  
+  #Dir['../lib/*.rb'].each { |f| require f }
   include SetDirectories
-  require './set_subdirectories.rb'
+  
   include CreateSubdirectories
-  require './create_collection_xml.rb'
+  
   include Collection_XML
-  require './transform_xml.rb'  
+   
   include Transforms
-  require './package_binaries.rb'  
+
   include PackageBinaries
-  require './pre_post_process_xml.rb'  
+  
   include CleanUpXML
-  require './qa_final_product.rb'  
+   
   include QA
 end
 #Children of the superclass
 class Excel_Based_Ingest < Tufts_Scholarship
-  require './excel_to_roo.rb'
+  
   include ToRoo
   def extract_it
     excel_subfolders
@@ -27,7 +29,7 @@ class Excel_Based_Ingest < Tufts_Scholarship
   end
 end
 class Springer_Ingest < Tufts_Scholarship
-  require './unzip_directories.rb'
+  
   include UnzipIt
   def extract_it
     springer_subfolders.unzip
@@ -40,7 +42,7 @@ class Springer_Ingest < Tufts_Scholarship
   end 
 end
 class Proquest_Ingest < Tufts_Scholarship
-  require './unzip_directories.rb'
+  
   include UnzipIt
   def extract_it
     proquest_subfolders.unzip
@@ -53,7 +55,7 @@ class Proquest_Ingest < Tufts_Scholarship
   end
 end
 class InHouse_Ingest < Tufts_Scholarship
-  require './inhouse.rb'
+  
   include Rename 
   def extract_it
     inhouse_subfolders
@@ -66,7 +68,7 @@ class InHouse_Ingest < Tufts_Scholarship
   end 
 end
 class Subject_Analysis < Tufts_Scholarship
-  require './subject_analysis.rb'
+ 
   include AnalyzeIt  
 end
 
