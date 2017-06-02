@@ -39,7 +39,6 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
                     <dcterms:isPartOf>Tufts University faculty scholarship.</dcterms:isPartOf>
                     <xsl:call-template name="rights"/>
                     <xsl:call-template name="date"/>
-                    <dc:date.created><xsl:value-of  select="current-dateTime()"/></dc:date.created>
                     <dc:type>Text</dc:type>
                     <dc:format>application/pdf</dc:format>
                     <admin:steward>tisch</admin:steward>
@@ -131,8 +130,8 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
         </xsl:choose>
     </xsl:template>
     <xsl:template match = "//OnlineDate/Year" name ="date">
-        <dc:date>
+        <dc:date.created>
             <xsl:value-of select=".//OnlineDate/Year"/>
-        </dc:date>
+        </dc:date.created>
     </xsl:template>
 </xsl:stylesheet>

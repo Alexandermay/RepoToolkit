@@ -49,7 +49,6 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="is_part_of"/>
                     <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
                     <xsl:call-template name="date"/>
-                    <dc:date.created><xsl:value-of  select="current-dateTime()"/></dc:date.created>
                     <xsl:call-template name="type"/>
                     <xsl:call-template name="format"/>
                     <xsl:call-template name="subject"/>
