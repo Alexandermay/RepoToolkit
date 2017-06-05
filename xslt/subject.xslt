@@ -64,9 +64,9 @@
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="date">
-            <xsl:for-each select="//dc:date.created">
-                <xsl:sort select="self::dc:date.created"/>
-                <xsl:for-each select="self::dc:date.created[not(.=following::dc:date.created)]">
+            <xsl:for-each select="//dc:date">
+                <xsl:sort select="self::dc:date"/>
+                <xsl:for-each select="self::dc:date[not(.=following::dc:date)]">
                     <xsl:value-of select="replace(.,'(\w$|\W$)','$1&#xD;')"/>
                 </xsl:for-each>
             </xsl:for-each>
