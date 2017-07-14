@@ -131,8 +131,8 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
         </xsl:choose>
     </xsl:template>
     <xsl:template match = "//OnlineDate/Year" name ="date">
-        <dc:date>
+        <dcterms:date>
             <xsl:value-of select=".//OnlineDate/Year"/>
-        </dc:date>
+        </dcterms:date>
     </xsl:template>
 </xsl:stylesheet>

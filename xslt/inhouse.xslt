@@ -300,12 +300,12 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match="@tag" name="date">
         <xsl:choose>
             <xsl:when test="controlfield[@tag = '008'][contains(text(), 'm')]">
-                <dc:date>
+                <dcterms:date>
                     <xsl:for-each select="controlfield[@tag = '008']">
                         <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s|\w.?.{16}$', ''))"
                         />
                     </xsl:for-each>
-                </dc:date> 
+                </dcterms:date> 
             </xsl:when>
             <xsl:otherwise>
                 <dc:date>

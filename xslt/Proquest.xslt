@@ -231,10 +231,10 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
         </xsl:choose>
     </xsl:template>
     <xsl:template match ="//DISS_comp_date" name = "date">
-        <dc:date>
+        <dcterms:date>
             <xsl:value-of
                 select="./DISS_submission/DISS_description/DISS_dates/DISS_comp_date"/>
-        </dc:date> 
+        </dcterms:date> 
     </xsl:template>
     <xsl:template match ="//DISS_inst_contact[1]" name = "dcaterms_department">
         <xsl:choose>

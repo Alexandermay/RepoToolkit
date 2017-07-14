@@ -3,6 +3,7 @@
     <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
         xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"
         xmlns:dcatech="http://nils.lib.tufts.edu/dcatech/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
         >
         <!-- Output as a text file -->
         <xsl:output method="text" encoding="UTF-16"/>
@@ -64,12 +65,19 @@
             </xsl:for-each>
         </xsl:variable>
         <xsl:variable name="date">
-            <xsl:for-each select="//dc:date">
-                <xsl:sort select="self::dc:date"/>
-                <xsl:for-each select="self::dc:date[not(.=following::dc:date)]">
-                    <xsl:value-of select="replace(.,'(\w$|\W$)','$1&#xD;')"/>
-                </xsl:for-each>
-            </xsl:for-each>
+            <xsl:choose>
+                <xsl:when test="//admin:displays[contains(text(),'trove')]">
+                    <xsl:for-each select="//digitalObject">
+                        <xsl:value-of select="replace(.//dc:title,'\.','')"/> has a date of :  <xsl:value-of select=".//dcterms:date"/> This should match the description field with the following date information, <xsl:value-of select="replace(.//dc:description[contains(text(),'Date')],'(\w$|\W$)','$1&#xD;')"/>
+                    </xsl:for-each>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:for-each select="//dcterms:date">
+                        <xsl:sort select="self::dcterms:date"/>
+                        <xsl:value-of select="replace(.,'(\w$|\W$)','$1&#xD;')"/>
+                    </xsl:for-each>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         
         <xsl:template match="/">             

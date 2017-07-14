@@ -3,6 +3,7 @@ Dir['../lib/*.rb'].each { |f| require_relative f }
 # Superclass
 class TuftsScholarship
   include SetDirectories
+  include CleanFileNames
   include CreateSubdirectories
   include CollectionXML
   include Transforms
@@ -14,7 +15,7 @@ end
 class ExcelBasedIngest < TuftsScholarship
   include ToRoo
   def extract
-    excel_subfolders.roo_to_xml
+    clean.excel_subfolders.roo_to_xml
   end
 
   def finish
@@ -29,7 +30,7 @@ class SpringerIngest < TuftsScholarship
   end
 
   def transform_it
-    preprocess_springer_xml.create_collection.transform_it_springer
+    preprocess_springer_xml.collection.transform_it_springer
   end
 
   def finish

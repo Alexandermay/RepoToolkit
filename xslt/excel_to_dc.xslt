@@ -44,7 +44,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="contributor"/>
                     <xsl:call-template name="description"/>
                     <xsl:call-template name="original_file_name"/>
-                    <xsl:call-template name="source"/>
+                    <xsl:call-template name="source_bibliographicCitation"/>
                     <xsl:call-template name="bibliographicCitation"/>
                     <xsl:call-template name="is_part_of"/>
                     <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
@@ -134,13 +134,26 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             select="normalize-space(Accession)"/>
         </dc:description>       
     </xsl:template>
-    <xsl:template match ="Source" name="source">
-        <dc:source><xsl:value-of select="normalize-space(Source)"/></dc:source>
+    <xsl:template match ="Source" name="source_bibliographicCitation">
+        <xsl:choose>
+            <xsl:when test="Process[contains(text(),'Trove')]">
+                 <dc:source><xsl:value-of select="normalize-space(Source)"/></dc:source>
+            </xsl:when>
+            <xsl:otherwise>
+                <dc:bibliographicCitation>
+                    <xsl:value-of select="normalize-space(Source)"/>
+                </dc:bibliographicCitation>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="bibliographicCitation" name="bibliographicCitation">
-        <dc:bibliographicCitation>
-            <xsl:value-of select="normalize-space(bibliographicCitation)"/>
-        </dc:bibliographicCitation>
+        <xsl:choose>
+            <xsl:when test="bibliographicCitation[text()]">
+                <dc:bibliographicCitation>
+                    <xsl:value-of select="normalize-space(bibliographicCitation)"/>
+                </dc:bibliographicCitation>  
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="Process" name="is_part_of">
         <xsl:choose>

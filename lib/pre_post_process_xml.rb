@@ -13,7 +13,7 @@ module CleanUpXML
     Dir.chdir('xml')
     Dir.entries('.').each do |entry|
       puts entry
-      if m = entry.match('\d.*\.xml\.Meta')
+      if entry.match('\d.*\.xml\.Meta')
         File.rename(entry, entry.gsub('.Meta', ''))
         puts 'changed!'
       end
