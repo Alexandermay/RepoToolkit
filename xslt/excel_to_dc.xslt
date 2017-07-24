@@ -139,6 +139,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             <xsl:when test="Process[contains(text(),'Trove')]">
                  <dc:source><xsl:value-of select="normalize-space(Source)"/></dc:source>
             </xsl:when>
+            <xsl:when test="Process[contains(text(),'SMFA')]">
+                <dc:source><xsl:value-of select="normalize-space(Source)"/></dc:source>
+            </xsl:when>
             <xsl:otherwise>
                 <dc:bibliographicCitation>
                     <xsl:value-of select="normalize-space(Source)"/>
@@ -166,6 +169,10 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             <xsl:when test="Process[contains(text(),'Student')]">
                 <dcterms:isPartOf>Tufts University student scholarship.</dcterms:isPartOf>
             </xsl:when>
+            <xsl:when test="Process[contains(text(),'SMFA')]">
+                <dcterms:isPartOf>Digitized books.</dcterms:isPartOf>
+                <dcterms:isPartOf>SMFA Artist books.</dcterms:isPartOf>
+            </xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
     </xsl:template>
@@ -173,9 +180,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match ="Date_Created" name="date">
         <xsl:call-template name="dateSplit">
             <xsl:with-param name="dateText">
-                <xsl:value-of select="normalize-space(replace(Date_Created,'[^.0-9]',''))"/>
+                <xsl:value-of select="normalize-space(Date_Created)"/>
             </xsl:with-param>
-        </xsl:call-template>
+        </xsl:call-template>       
     </xsl:template>
     <xsl:template match="Type" name ="type">
         <dc:type>
@@ -260,6 +267,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             </xsl:when>
             <xsl:when test="Process[contains(text(),'Nutrition')]">
                 <ac:comment>NutritionBatchTransform: <xsl:value-of  select="current-dateTime()"/>; Tisch manages metadata and binary.</ac:comment>
+            </xsl:when>
+            <xsl:when test="Process[contains(text(),'SMFA')]">
+                <ac:comment>SMFA_ArtistBooksBatchIngest: <xsl:value-of  select="current-dateTime()"/>; Tisch manages metadata and binary.</ac:comment>
             </xsl:when>
             <xsl:otherwise>
                 <ac:comment>NEW_CREATE_PROCESS_NEEDED</ac:comment> 

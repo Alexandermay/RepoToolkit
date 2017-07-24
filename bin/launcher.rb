@@ -89,7 +89,8 @@ puts '5. Springer Open Access Articles.'
 puts '6. Proquest Electronic Disertations and Theses.'
 puts '7. In-House digitized books.'
 puts '8. Subject Analysis.'
-puts '9. Exit.'
+puts '9. SMFA Artist Books.'
+puts '10. Exit.'
 puts
 prompt = '> '
 print prompt
@@ -151,8 +152,15 @@ while input = gets.chomp
     a_new_analysis = SubjectAnalysis.new
     a_new_analysis.subject_only.close_directories.re_qa_subject
     break
+    
+  when '9', '9.', 'SMFA'
+    puts
+    puts 'Launching the SMFA artist books script.'
+    a_new_smfa_ingest = ExcelBasedIngest.new
+    a_new_smfa_ingest.extract.smfa.excel.collection.transform.finish
+    break
 
-  when '9', '9.', '9. Exit', 'Exit'
+  when '10', '10.', '10. Exit', 'Exit'
     puts
     puts 'Goodbye.'
     break

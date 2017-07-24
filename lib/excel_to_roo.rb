@@ -57,6 +57,22 @@ module ToRoo
     file.close
     self
   end
+  
+  def smfa
+    require 'nokogiri'
+    f = File.open('firstTransform.xml')
+    @spreadsheet = Nokogiri::XML(f)
+    f.close
+    process = Nokogiri::XML::Node.new 'Process', @spreadsheet
+    process.content = 'SMFA'
+    @spreadsheet.xpath('//spreadsheet//sheet/cell').each do |node|
+      node.add_next_sibling(process)
+    end
+    file = File.open('firstTransform.xml', 'w')
+    file.puts @spreadsheet.to_xml
+    file.close
+    self
+  end
 
   def nutrition
     require 'nokogiri'

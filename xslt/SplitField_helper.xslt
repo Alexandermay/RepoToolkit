@@ -53,8 +53,8 @@ This stylesheet creates a group of templates for normalizing data entry errors, 
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
-    <!-- this portion of the XSLT creates a named template for creators, identifies delimeters from the input file and splits them into seperate dc:creator elements, 
-       it also ensures that each creator ends with a full stop-->
+    <!-- this portion of the XSLT creates a named template for dates, identifies delimeters from the input file and splits them into seperate dcterms date elements, 
+       it also ensures that each date ends with a full stop-->
     <xsl:template name="dateSplit" match="text()">
         <xsl:param name="dateText" select="."/>
         <xsl:if test="string-length($dateText)">
