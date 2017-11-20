@@ -70,33 +70,6 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <admin:createdby>externalXSLT</admin:createdby>
                     <!-- this portion inserts the boilerplate batch displays information -->
                     <admin:displays>dl</admin:displays>
-                    
-                    <!--
-                    <xsl:call-template name="description"/>
-                    <xsl:call-template name="original_file_name"/>
-                    <xsl:call-template name="source"/>
-                    <xsl:call-template name="bibliographicCitation"/>
-                    <xsl:call-template name="is_part_of"/>
-                    <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
-                    <xsl:call-template name="date"/>
-                    <dc:date.created><xsl:value-of  select="current-dateTime()"/></dc:date.created>
-                    <xsl:call-template name="type"/>
-                    <xsl:call-template name="format"/>
-                    <xsl:call-template name="subject"/>
-                    <xsl:call-template name="persname"/>
-                    <xsl:call-template name="corpname"/>
-                    <xsl:call-template name="geogname"/>
-                    <xsl:call-template name="genre"/>
-                    <xsl:call-template name="temporal"/>
-                    <xsl:call-template name="spatial"/>
-                    <xsl:call-template name="license"/>
-                    <dc:rights>https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
-                    <admin:steward>tisch</admin:steward>
-                    <ac:name>amay02</ac:name>
-                    <xsl:call-template name="admin_comment"/>
-                    <xsl:call-template name="admin_displays"/>
-                    <xsl:call-template name="embargo"/>
-                    -->
                 </digitalObject>
             </xsl:for-each>
         </input>
@@ -159,6 +132,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
         </xsl:for-each>
     </xsl:template>
     <xsl:template match="@tag" name="edition">
+        <xsl:for-each select="datafield[@tag = '250'][text()]">
         <xsl:choose>
             <xsl:when test="datafield[@tag = '250'][text()]">
                 <dc:description>
@@ -166,6 +140,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                 </dc:description>
             </xsl:when>
         </xsl:choose>
+        </xsl:for-each>
     </xsl:template>
     <xsl:template match="@tag" name="phyical_item_description">
         <dc:description>
@@ -178,7 +153,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
         <xsl:for-each select="datafield[@tag = '500']">
             <dc:description>
                 <xsl:value-of
-                    select="normalize-space(./replace(., '(MMeT.)|(MMeT)|(MMet)', ''))"
+                    select="normalize-space(.)"
                 />
             </dc:description>
         </xsl:for-each>
@@ -256,12 +231,13 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match="@tag" name="internet_archive">
         <xsl:choose>
             <xsl:when test="datafield[@tag = '910']/subfield[@code = 'a'][contains(text(), 'Tisch')]">
-                <dc:description><xsl:value-of select="normalize-space(./replace(., '.*/', ''))"/>
+                <dc:description><xsl:value-of select="normalize-space(./replace(datafield[@tag = '910']/subfield[@code = 'a'][contains(text(), 'Tisch')], '.*/', ''))"/>
                 </dc:description>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template match="@tag" name="internet_archive_source">
+        <xsl:for-each select="datafield[@tag = '776']/subfield[@code = 'w'][contains(text(), '(DLC)')]">
         <xsl:choose>
             <xsl:when
                 test="datafield[@tag = '776']/subfield[@code = 'w'][contains(text(), '(DLC)')]">
@@ -279,6 +255,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             </xsl:when>
             <xsl:otherwise/>
         </xsl:choose>
+        </xsl:for-each>
     </xsl:template>
     <xsl:template match="@tag" name="phys_source">
         <xsl:choose>

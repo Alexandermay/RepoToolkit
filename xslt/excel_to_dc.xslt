@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--    
 CREATED BY: Alex May, Tisch Library
 CREATED ON: 2017-03-31
@@ -8,6 +8,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dc11="http://purl.org/dc/elements/1.1/"
     xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"   
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
@@ -60,7 +61,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="temporal"/>
                     <xsl:call-template name="spatial"/>
                     <xsl:call-template name="license"/>
-                    <dc:rights>https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
+                    <xsl:call-template name="test"/>
                     <admin:steward>tisch</admin:steward>
                     <ac:name>amay02</ac:name>
                     <xsl:call-template name="admin_comment"/>
@@ -86,6 +87,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                 <rel:hasModel>info:fedora/afmodel:TuftsVideo</rel:hasModel>
             </xsl:when>
             <xsl:when test="Format = 'image/tiff'">
+                <rel:hasModel>info:fedora/cm:Image.4DS</rel:hasModel>
+            </xsl:when>
+            <xsl:when test="Format = 'Image/tiff'">
                 <rel:hasModel>info:fedora/cm:Image.4DS</rel:hasModel>
             </xsl:when>
             <xsl:otherwise>
@@ -285,5 +289,17 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
         <admin:embargo>
             <xsl:value-of select="normalize-space(Embargo)"/>
         </admin:embargo>       
+    </xsl:template>
+    <xsl:template match="License" name="test">
+        <xsl:choose>
+            <xsl:when test=".//License[contains(.,text())]">
+                <dc:rights>
+            <xsl:value-of select="normalize-space(License)"/>
+        </dc:rights> 
+            </xsl:when>
+            <xsl:otherwise>
+                <dc:rights>https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
+            </xsl:otherwise>
+        </xsl:choose>    
     </xsl:template>
 </xsl:stylesheet>

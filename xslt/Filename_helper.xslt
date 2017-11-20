@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--    
 CREATED BY: Alex May, Tisch Library
@@ -16,7 +16,8 @@ This stylesheet creates a template which is called in another stylsheet, and cre
             select="substring-after(pid,'tufts:')"/>
         <xsl:choose>
             <xsl:when test="format='application/mp4'">.mp4</xsl:when>
-            <xsl:when test="format='image/tiff'">.tff</xsl:when>
+            <xsl:when test="format='image/tiff'">.tif</xsl:when>
+            <xsl:when test="format='Image/tiff'">.tif</xsl:when>
             <xsl:otherwise>.archival.pdf</xsl:otherwise>
         </xsl:choose>
     </xsl:template>  
@@ -28,6 +29,7 @@ This stylesheet creates a template which is called in another stylsheet, and cre
             <xsl:choose>
             <xsl:when test="Format|format='application/mp4'">.mp4</xsl:when>
             <xsl:when test="Format|format='image/tiff'">.tif</xsl:when>
+            <xsl:when test="Format|format='Image/tiff'">.tif</xsl:when>
             <xsl:otherwise>.pdf</xsl:otherwise>
         </xsl:choose>
     </xsl:template>

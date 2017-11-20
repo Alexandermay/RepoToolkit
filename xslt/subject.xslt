@@ -68,7 +68,7 @@
             <xsl:choose>
                 <xsl:when test="//admin:displays[contains(text(),'trove')]">
                     <xsl:for-each select="//digitalObject">
-                        <xsl:value-of select="replace(.//dc:title,'\.','')"/> has a date of :  <xsl:value-of select=".//dcterms:date"/> This should match the description field with the following date information, <xsl:value-of select="replace(.//dc:description[contains(text(),'Date')],'(\w$|\W$)','$1&#xD;')"/>
+                        <xsl:value-of select="replace(.//dc:title,'\.','')"/> has a date of :  <xsl:value-of select=".//dcterms:date"/> This should match the description field with the following date information, <xsl:value-of select="replace(.//dc:description[contains(text(),'Date')],'(\w$|\W+$)','$1 &#xD;&#xD;')"/>
                     </xsl:for-each>
                 </xsl:when>
                 <xsl:otherwise>
@@ -94,7 +94,7 @@ Names:
             
             Dates
             
-<xsl:value-of select="$date"/>
+<xsl:value-of select="$date"/> 
             
             Personal names as subject
             
