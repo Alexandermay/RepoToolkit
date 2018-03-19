@@ -66,7 +66,7 @@ class InHouseIngest < TuftsScholarship
   end
 
   def finish
-    package.close_directories.qa_it
+    package.postprocess_alma_xml.close_directories.qa_it
   end
 end
 # Create a list of subjects used by catalogers
@@ -77,7 +77,7 @@ end
 puts `clear`
 puts '***************************************************'
 puts
-puts 'Welcome to the Repository Toolkit!'
+puts 'Welcome to the Repository Toolkit for MIRA 1.0!'
 puts
 puts 'What would you like to process?'
 puts

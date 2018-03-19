@@ -51,7 +51,6 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="language"/>
                     <xsl:call-template name="internet_archive"/>
                     <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
-                    <xsl:call-template name="internet_archive_source"></xsl:call-template>
                     <xsl:call-template name="phys_source"/>
                     <xsl:call-template name="date"/>
                     <dc:date.created><xsl:value-of  select="current-dateTime()"/></dc:date.created>
@@ -65,9 +64,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <dc:rights>https://sites.tufts.edu/dca/about-us/research-help/reproductions-and-use/</dc:rights>
                     <admin:steward>tisch</admin:steward>
                     <ac:name>amay02</ac:name>
-                    <ac:comment>InHouseDigitizationBatchTransform: <xsl:value-of
-                        select="current-dateTime()"/></ac:comment>
-                    <admin:createdby>externalXSLT</admin:createdby>
+                    <ac:comment><xsl:value-of select="datafield[@tag='910'][1]/subfield[@code = 'a']"/>. MARC record created info: <xsl:value-of select="datafield[@tag='910'][2]/subfield[@code = 'a']"/>.</ac:comment>
+                    <admin:createdby>amay02 via a batch ingest process on: <xsl:value-of
+                        select="current-dateTime()"/></admin:createdby>
                     <!-- this portion inserts the boilerplate batch displays information -->
                     <admin:displays>dl</admin:displays>
                 </digitalObject>
@@ -77,9 +76,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match="@tag" name="file">
         <xsl:choose>
             <xsl:when
-                test="datafield[@tag = '856']/subfield[@code = 'u'][contains(text(), 'archive.org')]">
+                test="datafield[@tag = '955']/subfield[@code = 'b'][contains(text(), 'ark')]">
                 <file><xsl:value-of
-                        select="datafield[@tag = '856']/subfield[@code = 'u'][contains(text(), 'archive.org')][contains(text(), 'archive.org')]"
+                        select="datafield[@tag = '955']/subfield[@code = 'q']"
                     />.pdf</file>
             </xsl:when>
             <xsl:when
@@ -224,7 +223,8 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     </xsl:template> 
     <xsl:template match="@tag" name="language">
         <dcterms:language>
-            <xsl:value-of select="normalize-space(controlfield[@tag = '008']/replace(., '.*?\s0\s|.{2}$', ''))"
+            <xsl:value-of
+                select="normalize-space(controlfield[@tag = '008']/replace(., '.*?\s\d\s|.{2}$', ''))"
             />
         </dcterms:language>
     </xsl:template> 
@@ -236,36 +236,15 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    <xsl:template match="@tag" name="internet_archive_source">
-        <xsl:for-each select="datafield[@tag = '776']/subfield[@code = 'w'][contains(text(), '(DLC)')]">
-        <xsl:choose>
-            <xsl:when
-                test="datafield[@tag = '776']/subfield[@code = 'w'][contains(text(), '(DLC)')]">
-                <dc:source>
-                    <xsl:value-of
-                        select="normalize-space(substring-before(replace(datafield[@tag = '776'], '(/|:|;|,|\.)', '$1 '), '(DLC)'))"
-                    />.</dc:source>
-            </xsl:when>
-            <xsl:when
-                test="datafield[@tag = '776']/subfield[@code = 'w'][contains(text(), '(OCoLC)')]">
-                <dc:source>
-                    <xsl:value-of
-                        select="normalize-space(substring-before(replace(datafield[@tag = '776'], '(/|:|;|,|\.)', '$1 '), '(OCoLC)'))"
-                    />.</dc:source>
-            </xsl:when>
-            <xsl:otherwise/>
-        </xsl:choose>
-        </xsl:for-each>
-    </xsl:template>
+    
     <xsl:template match="@tag" name="phys_source">
         <xsl:choose>
-            <xsl:when test="datafield[@tag = '776']/subfield[@code = 'w']">
-                <xsl:for-each
-                    select="datafield[@tag = '776']/subfield[@code = 'w']">
+            <xsl:when test="datafield[@tag = '776'][@ind2 = '8']">
+                
                     <dc:source>
-                        <xsl:value-of select="normalize-space(.)"/>
+                        <xsl:value-of select="normalize-space(datafield[@tag = '776'][1])"/>
                     </dc:source>
-                </xsl:for-each>
+                
             </xsl:when>
             <xsl:otherwise>
                 <dc:source>Original print publication: <xsl:value-of
@@ -276,23 +255,23 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     </xsl:template>
     <xsl:template match="@tag" name="date">
         <xsl:choose>
-            <xsl:when test="controlfield[@tag = '008'][contains(text(), 'm')]">
-                <dcterms:date>
-                    <xsl:for-each select="controlfield[@tag = '008']">
-                        <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s|\w.?.{16}$', ''))"
-                        />
-                    </xsl:for-each>
-                </dcterms:date> 
-            </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test=".//datafield[@tag = '264'][@ind2='1']/subfield[@code='c']">
                 <dc:date>
-                    <xsl:for-each select="controlfield[@tag = '008']">
-                        <xsl:value-of select="normalize-space(./replace(., '^.{7}|\s.*?$', ''))"
+                    <xsl:for-each select=".//datafield[@tag = '264'][@ind2='1']/subfield[@code='c']">
+                        <xsl:value-of select="normalize-space(replace(.,'\?|\[|\]|\.',''))"
                         />
                     </xsl:for-each>
-                </dc:date> 
-            </xsl:otherwise>
+                </dc:date>
+            </xsl:when>
+            <xsl:when test=".//datafield[@tag = '260']/subfield[@code='c']">
+                <dc:date>
+                <xsl:for-each select=".//datafield[@tag = '260']/subfield[@code='c']">
+                    <xsl:value-of select="normalize-space(replace(.,'\?|\[|\]|\.',''))"/>
+                </xsl:for-each> 
+                </dc:date>
+            </xsl:when>     
         </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="@tag" name="persname_subject">
         <xsl:choose>
