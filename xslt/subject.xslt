@@ -6,7 +6,7 @@
         xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
         >
         <!-- Output as a text file -->
-        <xsl:output method="text" encoding="UTF-16"/>
+        <xsl:output method="text" encoding="UTF-8"/>
         <!-- Create variables, output subjects, sort alphabeticaly, remove duplicates -->
         <xsl:variable name="creatorname">
             <xsl:for-each select="//dc:creator">
