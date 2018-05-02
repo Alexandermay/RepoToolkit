@@ -38,7 +38,7 @@ Currently set for a very localized MacOS environment.
  
 8. Change directory from Desktop to RepoToolKit\scripts
 
-         $ cd RepoToolKit\scripts
+         $ cd RepoToolKit\bin
         		  
 9. Run the launcher.rb
 
@@ -47,14 +47,23 @@ Currently set for a very localized MacOS environment.
 10. You should now see a welcome screen with a list of options.
 
         
+            Welcome to the Repository Toolkit for MIRA 1.0!
+
+            What would you like to process?
+
             1. Faculty Scholarship.
             2. Student Scholarship.
             3. Nutrition School.
             4. Art and Art History (Trove).
             5. Springer Open Access Articles.
-            6. Proquest Electronic Disertations and Theses
-            7. 
-            8. Exit
+            6. Proquest Electronic Disertations and Theses.
+            7. In-House digitized books.
+            8. Subject Analysis.
+            9. SMFA Artist Books.
+            10. Exit.
+
+            > 
+
                   
 
 11.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
