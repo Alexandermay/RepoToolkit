@@ -74,7 +74,25 @@ class SubjectAnalysis < TuftsScholarship
   include AnalyzeIt
 end
 
-puts `clear`
+$is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+$prompt = 'repotoolkit> '
+$saxon_path = ENV["SAXON_PATH"]
+$xslt_path = File.expand_path('../xslt', File.dirname(__FILE__))
+
+if $is_windows then
+  system ("cls")
+else
+  system ("clear")
+end
+
+if !$saxon_path then
+  puts
+  puts 'The environment variable SAXON_PATH is missing or blank.'
+  puts 'SAXON_PATH must contain the full pathname to the saxon jar file.'
+  puts 'Goodbye.'
+  exit
+end
+
 puts '***************************************************'
 puts
 puts 'Welcome to the Repository Toolkit for MIRA 1.0!'
