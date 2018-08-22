@@ -110,8 +110,8 @@ puts '8. Subject Analysis.'
 puts '9. SMFA Artist Books.'
 puts '10. Exit.'
 puts
-prompt = '> '
-print prompt
+
+print $prompt
 # Loop
 while input = gets.chomp
   case input
@@ -185,6 +185,6 @@ while input = gets.chomp
 
   else
     puts 'Please select from the above options.'
-    print prompt
+    print $prompt
   end
 end
