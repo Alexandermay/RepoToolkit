@@ -78,7 +78,7 @@ For installation, perform the following at the command prompt:
          What is the directory you are working with?
          repotoolkit>
 
-+   At the prompt (`>`) enter the absolute path to the `sample_set` directory[^1]
++   At the prompt (`repotoolkit> `) enter the absolute path to the `sample_set` directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
 +   Hit `return`
 + You should then see that the files are being moved into their respective directories, and Saxon is launched to transform the .xslx into the XML Tisch needs to despoit items into the repository.
