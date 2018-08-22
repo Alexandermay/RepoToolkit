@@ -8,43 +8,49 @@ A toolkit for proto-SIP processing at Tisch Library using a Ruby front-end to la
 * Roo
 * Nokogiri
 
-Currently set for a very localized MacOS environment.
+This should work in Windows, MacOS, and Unix environments.
 
-1. Make sure you have Ruby (at least 2.0.0)
+For installation, perform the following at the command prompt:
+
+1. Install [Ruby](https://www.ruby-lang.org/en/downloads/) (at least 2.0.0).  To test your version number, type:
 
          $ ruby -v
  
-2. If you don’t have Java, install it with [Homebrew](https://brew.sh/):
+2. Install [Java](https://www.java.com/en/download/). In MacOS, you can install Java with [Homebrew](https://brew.sh/):
 
          $ brew cask install java
 
-3. Download the latest version of [Saxon-HE](https://sourceforge.net/projects/saxon/files/) from [Saxonica](http://www.saxonica.com/download/opensource.xml) and put it in your Applications folder. Make sure the jar file we need to run the transforms is in the following path.
+3. Download the latest version of [Saxon-HE](https://sourceforge.net/projects/saxon/files/) from [Saxonica](http://www.saxonica.com/download/opensource.xml).  Saxon can be installed in any folder.  Create an Environment Variable named SAXON_PATH containing the full pathname to the saxon jar file, e.g.:
 
          //Applications/SaxonHE9-7-0-15J/saxon9he.jar
+         or
+         C:\Users\smcdon03\Desktop\SaxonHE9-8-0-8J\saxon9he.jar
 
 4. Install [roo](https://github.com/roo-rb/roo) as a gem:
 
          $ gem install roo
          
-5. Install [nokogiri](http://www.nokogiri.org/tutorials/installing_nokogiri.html) (Review nokogiri documentation.)
+5. Install [nokogiri](http://www.nokogiri.org/tutorials/installing_nokogiri.html) (Review nokogiri documentation.)  Nokogiri might be already installed as part of roo.
        
-6. Change your directory to your Desktop.
+6. Install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+
+7. Change your directory to where you want to install the Repotoolkit.  It may be installed in your Desktop folder, or any other folder you want.
 
          $ cd Desktop
         
-7. Clone the ToolKit
+8. Clone the ToolKit
 
          $ git clone https://github.com/Alexandermay/RepoToolkit.git
  
-8. Change directory from Desktop to RepoToolKit\scripts
+9. Change directory to RepoToolKit\bin
 
          $ cd RepoToolKit\bin
         		  
-9. Run the launcher.rb
+10. Run the launcher.rb
 
          $ ruby launcher.rb
 
-10. You should now see a welcome screen with a list of options.
+11. You should now see a welcome screen with a list of options.
 
         
             Welcome to the Repository Toolkit for MIRA 1.0!
@@ -62,15 +68,15 @@ Currently set for a very localized MacOS environment.
             9. SMFA Artist Books.
             10. Exit.
 
-            > 
+            repotoolkit> 
 
                   
 
-11.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
+12.   Test the install by typing "1" at the prompt.  This will launch the Faculty script.
 
          Launching the Faculty Scholarship script.
          What is the directory you are working with?
-         >
+         repotoolkit>
 
 +   At the prompt (`>`) enter the absolute path to the `sample_set` directory[^1]
 +   If you drag and drop the directory, make sure to delete any trailing whitespace.[^2] 
@@ -92,9 +98,4 @@ If `ingestThis.xml` is produced, and the content is packaged into excel, pdf and
 [^1]: The sample content is a pdf and .xlsx that I put together, so for the purposes of testing the install, we should be ok. That said, the only people installing this should be from Tisch.
 
 [^2]: When I enter the absolute path on my Mac it looks like this, with no trailing whitespace: 
-            `>/Users/amay02/Desktop/RepoToolkit/sample_set`
-
-
-        
-
-
+            `repotoolkit> /Users/amay02/Desktop/RepoToolkit/sample_set`
