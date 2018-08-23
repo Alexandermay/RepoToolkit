@@ -35,7 +35,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
             xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
             xmlns:ac="http://purl.org/dc/dcmitype/"
             xmlns:rel="info:fedora/fedora-system:def/relations-external#">
-            <xsl:for-each select="collection('../../RepoToolKit/TempRepo/collection.xml')/root/row">
+            <xsl:for-each select="collection('../TempRepo/collection.xml')/root/row">
                 <digitalObject>
                     <xsl:call-template name="file"/>
                     <xsl:call-template name="has_model"/>
