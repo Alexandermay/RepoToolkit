@@ -27,7 +27,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
             xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
             xmlns:ac="http://purl.org/dc/dcmitype/"
             xmlns:rel="info:fedora/fedora-system:def/relations-external#">
-            <xsl:for-each select="collection('../../RepoToolKit/TempRepo/xml/collection.xml')">
+            <xsl:for-each select="collection('../TempRepo/xml/collection.xml')">
                 <digitalObject>
                     <xsl:call-template name="file"/>
                     <rel:hasModel>info:fedora/cm:Text.PDF</rel:hasModel>
