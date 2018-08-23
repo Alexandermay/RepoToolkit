@@ -32,7 +32,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
             xmlns:admin="http://nils.lib.tufts.edu/dcaadmin/"
             xmlns:ac="http://purl.org/dc/dcmitype/"
             xmlns:rel="info:fedora/fedora-system:def/relations-external#">
-            <xsl:for-each select="collection('../../RepoToolKit/TempRepo/collection.xml')">
+            <xsl:for-each select="collection('../TempRepo/collection.xml')">
                 <xsl:sort select=".//DISS_comp_date" order="ascending"/>
                 <digitalObject>
                     <xsl:call-template name="file"/>
