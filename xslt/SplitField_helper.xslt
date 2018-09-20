@@ -96,7 +96,7 @@ This stylesheet creates a group of templates for normalizing data entry errors, 
                 />
             </dcadesc:subject>
             <xsl:call-template name="SubjectSplit">
-                <xsl:with-param name="subjectText" select="substring-after($subjectText, '|')"/>
+                <xsl:with-param name="subjectText" select="replace(substring-after($subjectText, '|'),'\..+$','.')"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>

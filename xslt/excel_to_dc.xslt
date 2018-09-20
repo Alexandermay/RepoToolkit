@@ -43,8 +43,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="alternative"/>
                     <xsl:call-template name="creator"/>
                     <xsl:call-template name="contributor"/>
-                    <xsl:call-template name="description"/>
-                    <xsl:call-template name="original_file_name"/>
+                    <xsl:call-template name="description"/>                   
                     <xsl:call-template name="source_bibliographicCitation"/>
                     <xsl:call-template name="bibliographicCitation"/>
                     <xsl:call-template name="is_part_of"/>
@@ -58,6 +57,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="corpname"/>
                     <xsl:call-template name="geogname"/>
                     <xsl:call-template name="genre"/>
+                    <xsl:call-template name="special_genre"/>
                     <xsl:call-template name="temporal"/>
                     <xsl:call-template name="spatial"/>
                     <xsl:call-template name="license"/>
@@ -65,6 +65,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <admin:steward>tisch</admin:steward>
                     <ac:name>amay02</ac:name>
                     <xsl:call-template name="admin_comment"/>
+                    <xsl:call-template name="original_file_name"/>
                     <xsl:call-template name="admin_displays"/>
                     <xsl:call-template name="embargo"/>
                 </digitalObject>
@@ -84,6 +85,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                 <rel:hasModel>info:fedora/cm:Audio</rel:hasModel>
             </xsl:when>
             <xsl:when test="Format = 'application/mp4'">
+                <rel:hasModel>info:fedora/afmodel:TuftsVideo</rel:hasModel>
+            </xsl:when>
+            <xsl:when test="Format = 'video/mp4'">
                 <rel:hasModel>info:fedora/afmodel:TuftsVideo</rel:hasModel>
             </xsl:when>
             <xsl:when test="Format = 'image/tiff'">
@@ -134,9 +138,9 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
         </xsl:call-template>     
     </xsl:template>
     <xsl:template match ="Accession" name ="original_file_name">
-        <dc:description>Original file name: <xsl:value-of
+        <ac:comment>Original file name: <xsl:value-of
             select="normalize-space(Accession)"/>
-        </dc:description>       
+        </ac:comment>       
     </xsl:template>
     <xsl:template match ="Source" name="source_bibliographicCitation">
         <xsl:choose>
@@ -232,6 +236,16 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                 <xsl:value-of select="normalize-space(Genre)"/>
             </xsl:with-param>
         </xsl:call-template>
+    </xsl:template>
+    <xsl:template match="Format" name ="special_genre">
+        <xsl:choose>
+            <xsl:when test="Format = 'application/mp4'">
+                <dcadesc:genre>streaming video.</dcadesc:genre>
+            </xsl:when>
+            <xsl:when test="Format = 'video/mp4'">
+                <dcadesc:genre>streaming video.</dcadesc:genre>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
     <xsl:template match="Century" name="temporal">
         <xsl:call-template name="TemporalSplit">

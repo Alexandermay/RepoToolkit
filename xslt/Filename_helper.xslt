@@ -16,6 +16,7 @@ This stylesheet creates a template which is called in another stylsheet, and cre
             select="substring-after(pid,'tufts:')"/>
         <xsl:choose>
             <xsl:when test="format='application/mp4'">.mp4</xsl:when>
+            <xsl:when test="format='video/mp4'">.mp4</xsl:when>
             <xsl:when test="format='image/tiff'">.tif</xsl:when>
             <xsl:when test="format='Image/tiff'">.tif</xsl:when>
             <xsl:otherwise>.archival.pdf</xsl:otherwise>
@@ -28,6 +29,7 @@ This stylesheet creates a template which is called in another stylsheet, and cre
             select="replace(replace(Accession,'.pdf',''),'[^0-9A-Za-z]','_')"/>
             <xsl:choose>
             <xsl:when test="Format|format='application/mp4'">.mp4</xsl:when>
+            <xsl:when test="Format|format='video/mp4'">.mp4</xsl:when>
             <xsl:when test="Format|format='image/tiff'">.tif</xsl:when>
             <xsl:when test="Format|format='Image/tiff'">.tif</xsl:when>
             <xsl:otherwise>.pdf</xsl:otherwise>

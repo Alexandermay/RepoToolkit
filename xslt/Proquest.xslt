@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--    
 CREATED BY: Alex May, Tisch Library
 CREATED ON: 2017-03-31
@@ -357,6 +357,9 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
             </xsl:when>
             <xsl:when test="//DISS_inst_name[1] [contains(text(),'Graduate Biomedical Sciences')] and //DISS_inst_contact[1] [contains(text(),'Therapeutics')]">
                 <dcadesc:corpname>Sackler School of Graduate Biomedical Sciences. Department of Pharmacology and Experimental Therapeutics.</dcadesc:corpname>
+            </xsl:when>
+            <xsl:when test="//DISS_inst_name[1] [contains(text(),'Graduate Biomedical Sciences')] and //DISS_inst_contact[1] [contains(text(),'Pharmacology')]">
+                <dcadesc:corpname>Sackler School of Graduate Biomedical Sciences. Graduate Program in Pharmacology and Drug Development.</dcadesc:corpname>
             </xsl:when>
             <xsl:otherwise>
                 <dcadesc:corpname>NONEFOUND</dcadesc:corpname>
