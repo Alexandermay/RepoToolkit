@@ -317,7 +317,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     </xsl:template>
     <xsl:template match="@tag" name="topic_subject">
         <xsl:choose>
-            <xsl:when test="datafield[@tag = 650][text()]">
+            <xsl:when test="datafield[@tag = 650][. != '']">
                 <xsl:for-each select="datafield[@tag = 650]">
                     <dcadesc:subject>
                         <xsl:call-template name="subfieldSelect">

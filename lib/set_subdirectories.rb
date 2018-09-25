@@ -6,12 +6,6 @@ module CreateSubdirectories
     unless Dir.glob('*.pdf').empty?
       Dir.mkdir('pdf')
     end
-    unless Dir.glob('*.mp3').empty?
-      Dir.mkdir('mp3')
-    end
-    unless Dir.glob('*.mp4').empty?
-      Dir.mkdir('mp4')
-    end
     unless Dir.glob('*.tif').empty?
       Dir.mkdir('tif')
     end

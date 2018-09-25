@@ -74,7 +74,26 @@ class SubjectAnalysis < TuftsScholarship
   include AnalyzeIt
 end
 
-puts `clear`
+$is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+$prompt = 'repotoolkit> '
+$saxon_path = '//Applications/SaxonHE9-7-0-15J/saxon9he.jar'
+$xslt_path = File.expand_path('../xslt', File.dirname(__FILE__))
+
+if !$saxon_path then
+  puts
+  puts 'The environment variable SAXON_PATH is missing or blank.'
+  puts 'SAXON_PATH must contain the full pathname to the saxon jar file.'
+  puts 'Goodbye.'
+  exit
+end
+
+if $is_windows then
+  system ("cls")
+else
+  system ("clear")
+end
+
+
 puts '***************************************************'
 puts
 puts 'Welcome to the Repository Toolkit for MIRA 1.0!'
@@ -92,8 +111,8 @@ puts '8. Subject Analysis.'
 puts '9. SMFA Artist Books.'
 puts '10. Exit.'
 puts
-prompt = '> '
-print prompt
+
+print $prompt
 # Loop
 while input = gets.chomp
   case input
@@ -167,6 +186,6 @@ while input = gets.chomp
 
   else
     puts 'Please select from the above options.'
-    print prompt
+    print $prompt
   end
 end

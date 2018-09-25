@@ -53,14 +53,6 @@ module PackageBinaries
       end
     end
     Dir.chdir(@copy_of_directory)
-    unless Dir.glob('*.mp4').empty?
-      FileUtils.mv Dir.glob('**/*.mp4'), 'mp4'
-      Dir.chdir('mp4')
-      Dir.entries('.').each do |entry|
-        puts entry
-      end
-    end
-    Dir.chdir(@copy_of_directory)
     unless Dir.glob('*.Meta').empty?
       FileUtils.mv Dir.glob('**/*.Meta'), 'xml'
       Dir.chdir('xml')
