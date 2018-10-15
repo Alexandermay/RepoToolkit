@@ -188,7 +188,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match ="Date_Created" name="date">
         <xsl:call-template name="dateSplit">
             <xsl:with-param name="dateText">
-                <xsl:value-of select="normalize-space(Date_Created)"/>
+                <xsl:value-of select="normalize-space(replace(Date_Created,'\.$',''))"/>
             </xsl:with-param>
         </xsl:call-template>       
     </xsl:template>
