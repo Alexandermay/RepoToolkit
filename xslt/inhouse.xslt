@@ -51,6 +51,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
                     <xsl:call-template name="language"/>
                     <xsl:call-template name="internet_archive"/>
                     <dc:publisher>Tufts University. Tisch Library.</dc:publisher>
+                    <dcterms:isPartOf>Digitized books &amp; mamuscripts.</dcterms:isPartOf>
                     <xsl:call-template name="phys_source"/>
                     <xsl:call-template name="date"/>
                     <dc:date.created><xsl:value-of  select="current-dateTime()"/></dc:date.created>
@@ -224,7 +225,7 @@ This stylesheet converts Excel metadata to qualified Dublin Core based on the ma
     <xsl:template match="@tag" name="language">
         <dcterms:language>
             <xsl:value-of
-                select="normalize-space(controlfield[@tag = '008']/replace(., '.*?\s\d\s|.{2}$', ''))"
+                select="normalize-space(controlfield[@tag = '008']/replace(., '(.*)(\w{3})(\s.${2}|\s${1})', '$2'))"
             />
         </dcterms:language>
     </xsl:template> 

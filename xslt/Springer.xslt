@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--    
 CREATED BY: Alex May, Tisch Library
 CREATED ON: 2017-03-31
@@ -18,7 +18,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
         <xsl:output-character character="‘" string="'"/>
         <xsl:output-character character="&#x2013;" string="-"/>
     </xsl:character-map>
-<!-- this starts the crosswalk-->
+    <!-- this starts the crosswalk-->
     <xsl:template match="/">
         <input xmlns:dc="http://purl.org/dc/elements/1.1/"
             xmlns:dcadesc="http://nils.lib.tufts.edu/dcadesc/"
@@ -54,7 +54,7 @@ This stylesheet converts Springer metadata to qualified Dublin Core based on the
     </xsl:template>
     <xsl:template match="//JournalInfo" name="file">
         <file><xsl:value-of select="//JournalInfo/JournalID"/>_<xsl:value-of
-                select="//RegistrationDate/Year"/>_Article_<xsl:value-of select="//ArticleID"
+            select="//RegistrationDate/Year"/>_Article_<xsl:value-of select="//ArticleID"
             />.pdf</file>
     </xsl:template>
     <xsl:template match="//ArticleTitle" name="title">
