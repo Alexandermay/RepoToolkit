@@ -7,7 +7,7 @@ module SetDirectories
     FileUtils.mkdir_p @copy_of_directory
     puts 'What is the directory you are working with?'
     print $prompt
-    @user_directory = gets.chomp
+    @user_directory = gets.chomp.strip
     FileUtils.copy_entry @user_directory, @copy_of_directory
     Dir.chdir(@copy_of_directory)
     self
